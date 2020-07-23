@@ -24,7 +24,7 @@ public class MenuController {
 	}
 
 	@GetMapping("/menu/{id}")
-	public ModelAndView showAction(ModelAndView mv , @PathVariable int idmenu) {
+	public ModelAndView showAction(ModelAndView mv , @PathVariable("id") int id) {
 		mv.setViewName("/menu/show");
 		return mv;
 	}
@@ -42,19 +42,19 @@ public class MenuController {
 	}
 
 	@GetMapping("/menu/restaurateur/update/{id}")
-	public ModelAndView updateFormAction(ModelAndView mv , @PathVariable int id) {
+	public ModelAndView updateFormAction(ModelAndView mv , @PathVariable("id") int id) {
 		mv.setViewName("/menu/update");
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/update/{id}")
-	public ModelAndView updateAction(ModelAndView mv , @PathVariable int id) {
+	public ModelAndView updateAction(ModelAndView mv , @PathVariable("id") int id) {
 		mv.setViewName("/menu/update");
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/delete/{id}")
-	public ModelAndView deleteAction(ModelAndView mv, @PathVariable int id) {
+	public ModelAndView deleteAction(ModelAndView mv, @PathVariable("id") int id) {
 		mv.setViewName("/menu/delete");
 		return mv;
 	}
