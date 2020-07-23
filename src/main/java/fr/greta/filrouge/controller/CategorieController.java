@@ -3,6 +3,7 @@ package fr.greta.filrouge.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -24,6 +25,35 @@ public class CategorieController {
 	@GetMapping("/category")
 	public ModelAndView showAll(ModelAndView mv) {
 		mv.setViewName("/category/showAll");
+	return mv;
+	}
+	@GetMapping("/category/add")
+	public ModelAndView addForm(ModelAndView mv) {
+		mv.setViewName("/category/addForm");
+	return mv;
+	}
+	
+	@PostMapping("/category/add")
+	public ModelAndView treatAddForm(ModelAndView mv) {
+		mv.setViewName("/category/addForm");
+	return mv;
+	}
+	
+	@GetMapping("/category/restaurateur/update/{id}")
+	public ModelAndView treatUpdateForm(ModelAndView mv) {
+		mv.setViewName("/category/updateForm");
+	return mv;
+	}
+	
+	@PostMapping("/category/update/{id}")
+	public ModelAndView updateForm(ModelAndView mv) {
+		mv.setViewName("/category/updateForm");
+	return mv;
+	}
+	
+	@PostMapping("/category/delete/{id}")
+	public ModelAndView treatDeleteForm(ModelAndView mv) {
+		mv.setViewName("/category/deleteForm");
 	return mv;
 	}
 	
