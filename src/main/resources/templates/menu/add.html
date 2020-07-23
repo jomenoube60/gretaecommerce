@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
+  <head th:replace="fragment/main :: head">
   </head>
   <body>
+  
+  <div th:replace="fragment/main :: navbar">
+  </div>
+  
+  <p>Hello world ! </p>
+  
+  <div th:replace="fragment/main :: footer">
+  </div>
 
   </body>
 </html>
