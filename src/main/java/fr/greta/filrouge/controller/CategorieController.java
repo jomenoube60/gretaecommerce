@@ -33,7 +33,7 @@ public class CategorieController {
 	return mv;
 	}
 	
-	@PostMapping("/category/add")
+	@PostMapping("/category/restaurateur/add")
 	public ModelAndView treatAddForm(ModelAndView mv) {
 		mv.setViewName("/category/addForm");
 	return mv;
@@ -45,13 +45,13 @@ public class CategorieController {
 	return mv;
 	}
 	
-	@PostMapping("/category/update/{id}")
+	@PostMapping("/category/restaurateur/update/{id}")
 	public ModelAndView updateForm(ModelAndView mv) {
 		mv.setViewName("/category/updateForm");
 	return mv;
 	}
 	
-	@PostMapping("/category/delete/{id}")
+	@PostMapping("/category/restaurateur/delete/{id}")
 	public ModelAndView treatDeleteForm(ModelAndView mv) {
 		mv.setViewName("/category/deleteForm");
 	return mv;
