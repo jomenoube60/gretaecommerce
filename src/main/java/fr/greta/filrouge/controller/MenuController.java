@@ -23,32 +23,32 @@ public class MenuController {
 
 	@GetMapping("/menu/restaurateur/add")
 	public MenuAndView addFormAction(MenuAndView mv ) {
-		mv.setViewName("/menu/restaurateur/add");
+		mv.setViewName("/menu/add");
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/add")
 	public MenuAndView addAction(MenuAndView mv , Menu menu) {
-		mv.setViewName("/menu/restaurateur/add");
+		mv.setViewName("/menu/add");
 		return mv;
 	}
 
 	@GetMapping("/menu/restaurateur/update/{id}")
 	public MenuAndView updateFormAction(MenuAndView mv , @PathVariable int id) {
-		mv.setViewName("/menu/restaurateur/update");
+		mv.setViewName("/menu/update");
 		mv.addObject("menu" , menu)
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/update/{id}")
 	public MenuAndView updateAction(MenuAndView mv , @PathVariable int id) {
-		mv.setViewName("/menu/restaurateur/update");
+		mv.setViewName("/menu/update");
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/delete/{id}")
 	public MenuAndView deleteAction(MenuAndView mv, @PathVariable int id) {
-		mv.setViewName("/menu/restaurateur/update");
+		mv.setViewName("/menu/delete");
 		return mv;
 	}
 
