@@ -1,13 +1,15 @@
 package fr.greta.filrouge.model;
 
 import java.io.Serializable;
+import javax.validation.constraints.*;
 
 public class Menu implements Serializable {
-	
+
+	@NotNull
 	private double prixHT;
 	private String name;
 	private boolean disponible;
-	
+
 	public double getPrixHT() {
 		return prixHT;
 	}
@@ -26,7 +28,7 @@ public class Menu implements Serializable {
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
-	
-	
-	
+
+
+
 }
