@@ -1,6 +1,9 @@
 package fr.greta.filrouge.controller;
 
+
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,27 +20,35 @@ public class MenuController {
   //       update "/menu/restaurateur/update" - menu/update
   //       delete "/menu/restaurateur/delete" - menu/delete
 
-	@GetMapping("/menu/")
+	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
 		mv.setViewName("/menu/show_all");
 		return mv;
 	}
 
 	@GetMapping("/menu/{id}")
-	public ModelAndView showAction(ModelAndView mv , @PathVariable("id") int id) {
+	public ModelAndView showAction(ModelAndView mv , @Valid Menu menu, @PathVariable("id") int id) {
+
 		mv.setViewName("/menu/show");
 		return mv;
 	}
 
 	@GetMapping("/menu/restaurateur/add")
-	public ModelAndView addFormAction(ModelAndView mv ) {
-		mv.setViewName("/menu/add");
+	public ModelAndView addFormAction(ModelAndView mv) {
+		Menu menu = new Menu();
+		mv.addObject("menu" , menu);
+		mv.setViewName("menu/add");
+		
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/add")
-	public ModelAndView addAction(ModelAndView mv , Menu menu) {
-		mv.setViewName("/menu/add");
+	public ModelAndView addAction(ModelAndView mv ,@Valid Menu menu, BindingResult errors) {
+		if(!errors.hasErrors()) {
+			mv.setViewName("redirect:/menu");
+		} else {
+			mv.setViewName("menu/add");
+		}
 		return mv;
 	}
 
