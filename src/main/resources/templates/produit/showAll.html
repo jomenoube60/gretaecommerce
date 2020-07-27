@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/main :: head">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Liste des produits</title>
 </head>
 <body>
+	<div th:replace="fragments/main :: navbar"></div>
+	<h1>Liste des produits :</h1>
+
+	<table class="table">
+		<tr>
+			<th>N°</th>
+			<th>Nom</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="product , productStat: ${products}">
+			<td th:text="${productStat.count}">0</td>
+			<td th:text="${product}">product</td>
+			<td>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<a type="button" class="btn btn-success" href="#" th:href="@{/produit/{id}(id=${productStat.count})}">Afficher
+						</a> <a type="button" class="btn btn-primary" href="#"
+				th:href="@{/retaurateur/produit/update/{id}(id=${productStat.count})}">Modifier
+							</a> <a type="button" class="btn btn-danger" href="#"
+				th:href="@{/restaurateur/produit/delete/{id}(id=${productStat.count})}">Supprimer
+								</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div th:replace="fragments/main :: footer"></div>
 
 </body>
 </html>

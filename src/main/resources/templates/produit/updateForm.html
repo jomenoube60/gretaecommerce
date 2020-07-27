@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head th:replace="fragment/main :: head">
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="fragments/main :: head">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Modifier un produit</title>
 </head>
 <body>
-	<div th:replace="fragment/main :: navbar"></div>
-	<footer th:replace="fragment/main :: footer"></footer>
+	<div th:replace="fragments/main :: navbar"></div>
+
+	<h1>Modifier un  un produit :</h1>
+
+
+	<form action="#" th:action="@{/restaurateur/produit/update/{id}}" th:object="${product}" method="post">
+		<input type="text" th:field="*{id}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">errors</p>
+		<input type="text" th:field="*{nom}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
+		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
+		<input type="submit" value="Ajouter">
+	</form>
+
+	<div th:replace="fragments/main :: footer"></div>
+
 </body>
 </html>
