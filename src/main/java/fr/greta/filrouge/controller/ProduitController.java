@@ -1,5 +1,8 @@
 package fr.greta.filrouge.controller;
 import java.util.ArrayList;
+
+import javax.validation.Valid;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
