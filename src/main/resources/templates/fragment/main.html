@@ -28,6 +28,11 @@
   text-align: center;
 }
 
+.accueil-categorie a {
+  text-decoration: none;
+  color: inherit;
+}
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -48,7 +53,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos Produits</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">N1os Produits</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="#" th:href="@{/category}">Tous nos produits</a>
           <a class="dropdown-item" href="#" th:href="@{/category/1}">Categorie 1</a>
