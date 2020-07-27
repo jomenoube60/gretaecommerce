@@ -34,7 +34,7 @@ public class ProduitController {
 	public ModelAndView afficherAddForm(ModelAndView mv) {
 		Produit product = new Produit();
 		mv.addObject("product", product);
-		mv.setViewName("produit/ajoutForm");
+		mv.setViewName("produit/addForm");
 		return mv;
 	}
 	@PostMapping("/restaurateur/produit/add")
