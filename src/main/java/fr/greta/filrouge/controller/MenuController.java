@@ -1,6 +1,8 @@
 package fr.greta.filrouge.controller;
 
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,7 +24,17 @@ public class MenuController {
 
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
-		mv.setViewName("/menu/show_all");
+		ArrayList<String> menus = new ArrayList<>();
+		menus.add("menu 1");
+		menus.add("menu 2");
+		menus.add("menu 3");
+		menus.add("menu 4");
+
+
+		mv.addObject("isRestaurateur", true);
+		mv.addObject("menus", menus);
+
+		mv.setViewName("/menu/showAll");
 		return mv;
 	}
 
@@ -38,7 +50,7 @@ public class MenuController {
 		Menu menu = new Menu();
 		mv.addObject("menu" , menu);
 		mv.setViewName("menu/add");
-		
+
 		return mv;
 	}
 
