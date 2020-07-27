@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.greta.filrouge.model.Produit;
 
 
-
+@Controller
 public class ProduitController {
 	@GetMapping("/produit")
 	public ModelAndView afficherLivres(ModelAndView mv) {
@@ -63,13 +64,13 @@ public class ProduitController {
 		return "redirect:/produit";
 	}
 
-	@GetMapping("/user/produit/{id}")
+	@GetMapping("/produit/{id}")
 	public ModelAndView showProduit(ModelAndView mv) {
 		mv.setViewName("produit/show");
 		return mv;
 	}
 
-	@GetMapping("/user/produit/search")
+	@GetMapping("/produit/search")
 	public ModelAndView searchProduit(ModelAndView mv,
 											@RequestParam(name = "name") String nameProduit) {
 		mv.addObject("nameProduit", nameProduit);
