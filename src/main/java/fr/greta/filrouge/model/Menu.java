@@ -2,9 +2,14 @@ package fr.greta.filrouge.model;
 
 import java.io.Serializable;
 import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Menu implements Serializable {
 
+	@Id
+	private int id;
 	@NotNull
 	private double prixHT;
 	private String name;
