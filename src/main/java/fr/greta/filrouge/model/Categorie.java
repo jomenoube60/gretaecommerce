@@ -37,58 +37,51 @@ public class Categorie {
 		return image64;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public Categorie getCategorieParente() {
+		return categorieParente;
+	}
+
+	public void setCategorieParente(Categorie categorieParente) {
+		this.categorieParente = categorieParente;
+	}
+
+	public List<Produit> getProduits() {
+		return produits;
+	}
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	public void setImage64(String image64) {
 		this.image64 = image64;
 	}
 
 
-	public String getNom() {
-		return nom;
-	}
-
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-	public Categorie getCategorieParente() {
-		return categorieParente;
-	}
-
-
-	public void setCategorieParente(Categorie categorieParente) {
-		this.categorieParente = categorieParente;
-	}
-
-
-	public List<Produit> getProduits() {
-		return produits;
-	}
-
-
-	public void setProduits(List<Produit> produits) {
-		this.produits = produits;
-	}
-
-
-	public byte[] getImage() {
-		return image;
-	}
-
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
+	
+	
 }
