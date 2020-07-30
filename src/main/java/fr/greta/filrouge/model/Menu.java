@@ -21,24 +21,46 @@ public class Menu implements Serializable {
 	@ManyToMany
 	private List <Produit> produits;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public double getPrixHT() {
 		return prixHT;
 	}
+
 	public void setPrixHT(double prixHT) {
 		this.prixHT = prixHT;
 	}
-	public String getName() {
-		return name;
+
+	public String getNom() {
+		return nom;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
+
 	public boolean isDisponible() {
 		return disponible;
 	}
+
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
+
+	public List<Produit> getProduits() {
+		return produits;
+	}
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
+
 
 
 
