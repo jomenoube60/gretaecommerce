@@ -2,9 +2,16 @@ package fr.greta.filrouge.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+@Entity
 public class Produit implements Serializable {
+	@Id
 	private int id;
 	private String nom;
+	@NotBlank(message = "Nom de produit ne pas être vide !")
 	private String categorie;
 	private int quantiteDisponible;
 
