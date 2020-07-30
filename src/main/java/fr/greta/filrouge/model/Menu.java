@@ -15,9 +15,9 @@ public class Menu implements Serializable {
 	private int id;
 	@NotNull
 	private double prixHT;
-	private String name;
+	private String nom;
 	private boolean disponible;
-	
+
 	@ManyToMany
 	private List <Produit> produits;
 

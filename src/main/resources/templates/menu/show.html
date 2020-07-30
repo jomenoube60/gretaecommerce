@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/main :: head">
+<meta charset="UTF-8">
+<title>Liste des menus</title>
+</head>
+<body>
+	<div th:replace="fragment/main :: navbar"></div>
+  <div th:if="${erreurMsg}" th:text="${erreurMsg}"></div>
+  <div th:if="${menu}" class="row">
+    <h1 th:text="${menu.nom}">Produit</h1>
 
-  </body>
+  <div class="col-md-8">  	<table class="table">
+    		<tr>
+    			<th>Nom</th>
+    			<th>Action</th>
+    		</tr>
+    		<tr th:each="produit , menuStat: ${menu.produits}">
+    			<td th:text="${produit.nom}">menu</td>
+
+    		</tr>
+    	</table>
+</div>
+
+<div>
+  Autres offres
+</div>
+  	<div th:replace="fragment/main :: footer"></div>
+
+
+  </div>
+</body>
 </html>

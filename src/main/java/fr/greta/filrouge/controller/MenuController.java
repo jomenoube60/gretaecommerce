@@ -43,9 +43,9 @@ public class MenuController {
 	@GetMapping("/menu/{id}")
 	public ModelAndView showAction(ModelAndView mv , @PathVariable("id") int id , RedirectAttributes redirectAttrs) {
 		Optional<Menu> menuOpt = menuRepos.findById(id);
+		mv.setViewName("/menu/show");
 		if(menuOpt.isPresent()) {
 			Menu menu = menuOpt.get();
-			mv.setViewName("/menu/show");
 			mv.addObject(menu);
 		} else {
 			redirectAttrs.addAttribute("erreurMsg", "Livre introuvable");
