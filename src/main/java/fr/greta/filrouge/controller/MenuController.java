@@ -1,7 +1,8 @@
 package fr.greta.filrouge.controller;
 
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.greta.filrouge.MenuRepository;
 import fr.greta.filrouge.model.Menu;
 
+
 @Controller
 public class MenuController {
 	
@@ -26,13 +28,8 @@ public class MenuController {
 
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
-		ArrayList<String> menus = new ArrayList<>();
-		menus.add("menu 1");
-		menus.add("menu 2");
-		menus.add("menu 3");
-		menus.add("menu 4");
-
-
+		List<Menu> menus = menuRepos.findAll();
+		
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("menus", menus);
 
