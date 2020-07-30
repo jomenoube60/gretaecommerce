@@ -15,6 +15,7 @@
 		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
 		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
+
 		<input type="submit" value="Ajouter">
 	</form>
 
