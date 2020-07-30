@@ -7,10 +7,12 @@
 <body>
 	<div th:replace="fragment/main :: navbar"></div>
   <div th:if="${erreurMsg}" th:text="${erreurMsg}"></div>
-  <div th:if="${menu}" class="row">
-    <h1 th:text="${menu.nom}">Produit</h1>
 
-  <div class="col-md-8">  	<table class="table">
+    <h1 th:text="${menu.nom}">Produit</h1>
+  <div th:if="${menu}" class="row">
+
+  <div class="col-md-8">
+  <table class="table">
     		<tr>
     			<th>Nom</th>
     			<th>Action</th>
@@ -24,7 +26,7 @@
 
 <div>
   Autres offres
-</div>
+</div class="col-md-4">
   	<div th:replace="fragment/main :: footer"></div>
 
 

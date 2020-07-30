@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.*;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -12,11 +14,13 @@ import javax.persistence.ManyToMany;
 public class Menu implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotNull
 	private double prixHT;
 	private String nom;
 	private boolean disponible;
+	private boolean actif;
 
 	@ManyToMany
 	private List <Produit> produits;
@@ -61,6 +65,13 @@ public class Menu implements Serializable {
 		this.produits = produits;
 	}
 
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
 
 
 
