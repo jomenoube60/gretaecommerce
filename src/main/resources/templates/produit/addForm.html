@@ -10,9 +10,7 @@
 	<h1>Ajouter un produit :</h1>
 
 
-	<form action="#" th:action="@{/restaurateur/produit/add}" th:object="${product}" method="post">
-		<input type="text" th:field="*{id}" th:errorclass="errorField">
-		<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">errors</p>
+	<form action="#" th:action="@{/restaurateur/produit/add}" th:object="${produit}" method="post">
 		<input type="text" th:field="*{nom}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
 		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">

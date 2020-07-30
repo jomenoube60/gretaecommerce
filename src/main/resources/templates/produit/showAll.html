@@ -6,24 +6,32 @@
 </head>
 <body>
 	<div th:replace="fragment/main :: navbar"></div>
+		<p th:if="${erreurMsg}" th:text="${erreurMsg}" class="erreurMsg">error</p>
+	
 	<h1>Liste des produits :</h1>
 
 	<table class="table">
 		<tr>
 			<th>N°</th>
+			<th>Id</th>
 			<th>Nom</th>
+			<th>Categorie</th>
+			<th>Quantite Disponible</th>
 			<th>Action</th>
 		</tr>
-		<tr th:each="product , productStat: ${products}">
-			<td th:text="${productStat.count}">0</td>
-			<td th:text="${product}">product</td>
+		<tr th:each="produit , produitStat: ${produits}">
+			<td th:text="${produitStat.count}">0</td>
+			<td th:text="${produit.id}">produit</td>
+			<td th:text="${produit.nom}">produit</td>
+			<td th:text="${produit.categorie}">produit</td>
+			<td th:text="${produit.quantiteDisponible}">produit</td>
 			<td>
 				<div class="btn-group" role="group" aria-label="Basic example">
-					<a type="button" class="btn btn-success" href="#" th:href="@{/produit/{id}(id=${productStat.count})}">Afficher
+					<a type="button" class="btn btn-success" href="#" th:href="@{/user/produit/{id}(id=${produit.id})}">Afficher
 						</a> <a type="button" class="btn btn-primary" href="#"
-				th:href="@{/retaurateur/produit/update/{id}(id=${productStat.count})}">Modifier
+				th:href="@{/retaurateur/produit/update/{id}(id=${produit.id})}">Modifier
 							</a> <a type="button" class="btn btn-danger" href="#"
-				th:href="@{/restaurateur/produit/delete/{id}(id=${productStat.count})}">Supprimer
+				th:href="@{/restaurateur/produit/delete/{id}(id=${produit.id})}">Supprimer
 								</a>
 				</div>
 			</td>
