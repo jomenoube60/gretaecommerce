@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.validation.constraints.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Menu implements Serializable {
@@ -14,6 +15,9 @@ public class Menu implements Serializable {
 	private double prixHT;
 	private String name;
 	private boolean disponible;
+	
+	@ManyToMany
+	private Produit produits;
 
 	public double getPrixHT() {
 		return prixHT;
