@@ -15,18 +15,19 @@
   <table class="table">
     		<tr>
     			<th>Nom</th>
-    			<th>Action</th>
+    			<th>Categorie</th>
     		</tr>
     		<tr th:each="produit , menuStat: ${menu.produits}">
     			<td th:text="${produit.nom}">menu</td>
+    			<td></td>
 
     		</tr>
     	</table>
 </div>
 
-<div>
+<div class="col-md-4">
   Autres offres
-</div class="col-md-4">
+</div>
   	<div th:replace="fragment/main :: footer"></div>
 
 
