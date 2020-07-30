@@ -25,16 +25,25 @@ public class Produit implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getCategorie() {
-		return categorie;
-	}
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
-	}
+
 	public int getQuantiteDisponible() {
 		return quantiteDisponible;
 	}
 	public void setQuantiteDisponible(int quantiteDisponible) {
 		this.quantiteDisponible = quantiteDisponible;
 	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 }

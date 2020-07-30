@@ -1,6 +1,8 @@
 package fr.greta.filrouge.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.validation.constraints.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ public class Menu implements Serializable {
 	private boolean disponible;
 	
 	@ManyToMany
-	private Produit produits;
+	private List <Produit> produits;
 
 	public double getPrixHT() {
 		return prixHT;
