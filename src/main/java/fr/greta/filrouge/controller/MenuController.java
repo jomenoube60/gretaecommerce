@@ -4,6 +4,8 @@ package fr.greta.filrouge.controller;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.greta.filrouge.MenuRepository;
 import fr.greta.filrouge.model.Menu;
 
 @Controller
 public class MenuController {
-	// Menu
-  //       show "/menu/{id} - menu/show
-  //       showAll "/menu/" - menu/show_all
-  //       add "/menu/restaurateur/add" - menu/add
-  //       update "/menu/restaurateur/update" - menu/update
-  //       delete "/menu/restaurateur/delete" - menu/delete
+	
+	@Autowired
+	private MenuRepository menuRepos;
 
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
