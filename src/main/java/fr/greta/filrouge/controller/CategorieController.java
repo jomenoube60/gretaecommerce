@@ -16,44 +16,44 @@ delete "/produit/categorie/delete"*/
 
 @Controller
 public class CategorieController {
-	@GetMapping("/category/{id}")
+	@GetMapping("/categorie/{id}")
 	public ModelAndView show(ModelAndView mv, @PathVariable int id) {
-		mv.setViewName("/category/show");
+		mv.setViewName("/categorie/show");
 	return mv;
 	}
 
-	@GetMapping("/category")
+	@GetMapping("/categorie")
 	public ModelAndView showAll(ModelAndView mv) {
-		mv.setViewName("/category/showAll");
+		mv.setViewName("/categorie/showAll");
 	return mv;
 	}
-	@GetMapping("/category/add")
+	@GetMapping("/categorie/add")
 	public ModelAndView addForm(ModelAndView mv) {
-		mv.setViewName("/category/addForm");
+		mv.setViewName("/categorie/addForm");
 	return mv;
 	}
 	
-	@PostMapping("/category/restaurateur/add")
+	@PostMapping("/categorie/restaurateur/add")
 	public ModelAndView treatAddForm(ModelAndView mv) {
-		mv.setViewName("/category/addForm");
+		mv.setViewName("/categorie/addForm");
 	return mv;
 	}
 	
-	@GetMapping("/category/restaurateur/update/{id}")
+	@GetMapping("/categorie/restaurateur/update/{id}")
 	public ModelAndView treatUpdateForm(ModelAndView mv) {
-		mv.setViewName("/category/updateForm");
+		mv.setViewName("/categorie/updateForm");
 	return mv;
 	}
 	
-	@PostMapping("/category/restaurateur/update/{id}")
+	@PostMapping("/categorie/restaurateur/update/{id}")
 	public ModelAndView updateForm(ModelAndView mv) {
-		mv.setViewName("/category/updateForm");
+		mv.setViewName("/categorie/updateForm");
 	return mv;
 	}
 	
-	@PostMapping("/category/restaurateur/delete/{id}")
+	@PostMapping("/categorie/restaurateur/delete/{id}")
 	public ModelAndView treatDeleteForm(ModelAndView mv) {
-		mv.setViewName("/category/deleteForm");
+		mv.setViewName("/categorie/deleteForm");
 	return mv;
 	}
 	
