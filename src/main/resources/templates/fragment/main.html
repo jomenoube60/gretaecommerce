@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v4.0.1">
+<meta name="csrfHeaderName" th:content="${_csrf.headerName}">
+<meta name="csrfToken" th:content="${_csrf.token}">
     <title>Restaurant</title>
 
     <!-- Bootstrap core CSS -->
@@ -55,13 +57,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">N1os Produits</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" th:href="@{/category}">Tous nos produits</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/1}">Categorie 1</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/2}">Categorie 2</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/3}">Categorie 3</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/4}">Categorie 4</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/5}">Categorie 5</a>
-          <a class="dropdown-item" href="#" th:href="@{/category/6}">Categorie 6</a>
+          <a class="dropdown-item" href="#" th:href="@{/categorie}">Tous nos produits</a>
         </div>
       </li>
 
@@ -85,8 +81,7 @@
   </div>
 </nav>
 	<footer th:fragment="footer">
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous">
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -94,6 +89,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 		</script>
+		<script type="text/javascript" src="#" th:src="@{/js/main.js}"></script>
 		<p>&copy;Greta60</p>
 	</footer>
 	</body>
