@@ -39,4 +39,5 @@ mvnw
 mvnw.cmd
 pom.xml
 src/main/resources/application.properties
+.attach_pid13151
 src/main/resources/import.sql
