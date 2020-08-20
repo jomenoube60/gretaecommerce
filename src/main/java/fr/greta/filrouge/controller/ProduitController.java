@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.greta.filrouge.ProduitRepository;
 import fr.greta.filrouge.model.Categorie;
 import fr.greta.filrouge.model.Produit;
 import fr.greta.filrouge.repos.CategorieRepository;
+import fr.greta.filrouge.repos.ProduitRepository;
 
 
 
