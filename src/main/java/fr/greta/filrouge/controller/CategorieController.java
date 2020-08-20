@@ -18,42 +18,42 @@ delete "/produit/categorie/delete"*/
 public class CategorieController {
 	@GetMapping("/category/{id}")
 	public ModelAndView show(ModelAndView mv, @PathVariable int id) {
-		mv.setViewName("/category/show");
+		mv.setViewName("/categorie/show");
 	return mv;
 	}
 
 	@GetMapping("/category")
 	public ModelAndView showAll(ModelAndView mv) {
-		mv.setViewName("/category/showAll");
+		mv.setViewName("/categorie/showAll");
 	return mv;
 	}
 	@GetMapping("/category/add")
 	public ModelAndView addForm(ModelAndView mv) {
-		mv.setViewName("/category/addForm");
+		mv.setViewName("/categorie/addForm");
 	return mv;
 	}
 	
 	@PostMapping("/category/restaurateur/add")
 	public ModelAndView treatAddForm(ModelAndView mv) {
-		mv.setViewName("/category/addForm");
+		mv.setViewName("/categorie/addForm");
 	return mv;
 	}
 	
 	@GetMapping("/category/restaurateur/update/{id}")
 	public ModelAndView treatUpdateForm(ModelAndView mv) {
-		mv.setViewName("/category/updateForm");
+		mv.setViewName("/categorie/updateForm");
 	return mv;
 	}
 	
 	@PostMapping("/category/restaurateur/update/{id}")
 	public ModelAndView updateForm(ModelAndView mv) {
-		mv.setViewName("/category/updateForm");
+		mv.setViewName("/categorie/updateForm");
 	return mv;
 	}
 	
 	@PostMapping("/category/restaurateur/delete/{id}")
 	public ModelAndView treatDeleteForm(ModelAndView mv) {
-		mv.setViewName("/category/deleteForm");
+		mv.setViewName("/categorie/deleteForm");
 	return mv;
 	}
 	

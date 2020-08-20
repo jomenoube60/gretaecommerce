@@ -1,4 +1,4 @@
-package fr.greta.filrouge;
+package fr.greta.filrouge.repos;
 
 import java.util.List;
 
