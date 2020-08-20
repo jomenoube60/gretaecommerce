@@ -19,6 +19,7 @@ import fr.greta.filrouge.repos.RestaurantRepository;
 public class RestaurantController {
 	@Autowired
 	private RestaurantRepository restoRepo;
+	@Autowired
 	private CategorieRepository categorieRepo;
 
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
@@ -34,6 +35,5 @@ public class RestaurantController {
 		List <Categorie> categorieList = categorieRepo.findAll();
 		mv.addObject("categorie" , categorieList);
 		return mv;
-//		return new ModelAndView("index", "message", "Hello World !");
 	}
 }
