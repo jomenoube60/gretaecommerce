@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragment/main :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="fragment/main :: navbar"></div>
+		</p>
+	<h1>Ajouter un livre :</h1>
+	<!-- formulaire -->
+	
+	<form action="#" th:action="@{/restaurateur/categorie/add}" 
+					th:object="${categorie}" 
+					method="post" 
+					enctype="multipart/form-data">	
+		<input type="text" th:field="*{nom}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('nom')}" th:errors= "*{nom}">>errors</p>
+		
+		<input type="file" th:field="*{image}">
+		<input type="submit" value="Ajouter">
+	</form>
+	
+	<footer th:replace="fragment/main :: footer"></footer>
+</body>
+</html>
