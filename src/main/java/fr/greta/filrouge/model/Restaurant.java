@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-class Restaurant  {
+public class Restaurant  {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
