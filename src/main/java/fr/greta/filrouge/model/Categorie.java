@@ -10,7 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import fr.greta.filrouge.model.Produit;
 
 @Entity
 
@@ -20,19 +19,22 @@ public class Categorie {
 	private int id;
 
 	private String nom;
-	
+
+	@ManyToOne
+	private Restaurant restaurant;
+
 	@ManyToOne
 	private Categorie categorieParente;
-	
+
 	@ManyToMany
 	private List<Produit> produits;
-	
+
 	@Lob
 	private byte[] image;
-	
+
 	@Transient
 	private String image64;
-	
+
 	public String getImage64() {
 		return image64;
 	}
@@ -81,7 +83,15 @@ public class Categorie {
 		this.image64 = image64;
 	}
 
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
 
-	
-	
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+
+
+
 }
