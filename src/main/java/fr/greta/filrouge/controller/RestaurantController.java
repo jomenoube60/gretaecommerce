@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Optional;
-
 import fr.greta.filrouge.model.Categorie;
 import fr.greta.filrouge.model.Restaurant;
 import fr.greta.filrouge.repos.CategorieRepository;
 import fr.greta.filrouge.repos.RestaurantRepository;
+
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 //@RequestMapping("/user")
