@@ -37,22 +37,22 @@ public class CategorieController {
 
 	@Autowired
 	private CategorieRepository cateRepos;
-	
-	
-	
+
+
+
 	Logger logger = LoggerFactory.getLogger(CategorieController.class);
-	
+
 	@GetMapping("/categorie")
 	public ModelAndView afficherLivres(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
 		addImage64(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
-		
+
 		mv.setViewName("categorie/afficherTous");
 		return mv;
 	}
-		
+
 	@GetMapping("/restaurateur/categorie/add")
 	public ModelAndView afficherAddForm(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
@@ -61,7 +61,7 @@ public class CategorieController {
 		mv.setViewName("categorie/ajoutForm");
 		return mv;
 	}
-	
+
 	@PostMapping ("/restaurateur/categorie/add")
 	public ModelAndView traiterAddForm(ModelAndView mv, @Valid Categorie categorie, BindingResult errors) {
 		logger.info(errors.toString());
@@ -75,7 +75,7 @@ public class CategorieController {
 		}
 		return mv;
 	}
-	
+
 	@GetMapping("/restaurateur/categorie/update/{id}")
 	public ModelAndView afficherUpdateForm(ModelAndView mv, @PathVariable int id) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
@@ -94,7 +94,7 @@ public class CategorieController {
 			return "categorie/updateForm";
 		}
 	}
-	
+
 	@PostMapping ("/restaurateur/categorie/delete/{id}")
 	@ResponseBody
 	public boolean traiterDeleteForm(@PathVariable int id) {
@@ -105,13 +105,13 @@ public class CategorieController {
 		catch (Exception ex) {
 			return false;
 		}
-		
+
 	}
-	
+
 	@GetMapping("/categorie/{id}")
 	public ModelAndView afficherCategorie(ModelAndView mv, @PathVariable int id, RedirectAttributes redirectAttrs) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
-// tester si categorie existe		
+// tester si categorie existe
 		if(categorieOpt.isPresent()) {
 			Categorie categorie = categorieOpt.get();
 			mv.addObject("categorie", categorie);
@@ -123,18 +123,6 @@ public class CategorieController {
 		}
 		return mv;
 	}
-	
-//	@GetMapping("/categorie/search")
-//	public ModelAndView rechercherLivres(ModelAndView mv,
-//										@RequestParam (name = "nom") String nomCategorie) {
-//		mv.addObject("nomCategorie", nomCategorie);
-//		List<Categorie> categories = cateRepos.findByNomContaining(nomCategorie);
-//		addImage64(categories);
-//		mv.addObject("categories", categories);
-//		logger.info(categories.toString());
-//		mv.setViewName("categorie/afficherResultat");
-//		return mv;
-//	}
 
 	private void addImage64(List<Categorie> categories) {
 		for (Iterator iterator = categories.iterator(); iterator.hasNext();) {
@@ -142,12 +130,12 @@ public class CategorieController {
 			if(categorie.getImage() != null) {
 				byte[] imageBin = categorie.getImage();
 				String image64 = Base64Utils.encodeToString(imageBin);
-				categorie.setImage64(image64);			
+				categorie.setImage64(image64);
 			}
 
 		}
 	}
-	
-	
+
+
 
 }
