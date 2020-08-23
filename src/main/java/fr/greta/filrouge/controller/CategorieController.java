@@ -34,11 +34,8 @@ delete "/produit/categorie/delete"*/
 
 @Controller
 public class CategorieController {
-
 	@Autowired
 	private CategorieRepository cateRepos;
-
-
 
 	Logger logger = LoggerFactory.getLogger(CategorieController.class);
 

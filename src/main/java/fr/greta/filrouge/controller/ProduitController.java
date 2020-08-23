@@ -55,13 +55,16 @@ public class ProduitController {
 		return mv;
 	}
 	@PostMapping("/restaurateur/produit/add")
-	public ModelAndView traiterAddform(ModelAndView mv, @Valid Produit produit, BindingResult errors) {
+	public ModelAndView traiterAddform(@Valid Produit produit, BindingResult errors, ModelAndView mv) {
 		logger.info(errors.toString());
 		if(!errors.hasErrors()) {
 			produitRepos.save(produit);
 			mv.setViewName("redirect:/produits");
 		}
 		else {
+			
+			List<Categorie> categories = categorieRepos.findAll();
+			mv.addObject("categorieList", categories);
 			mv.setViewName("produit/addForm");
 		}
 		return mv;
@@ -108,7 +111,7 @@ public class ProduitController {
 		}
 		else {
 			redirectAttrs.addFlashAttribute("erreurMsg", "Produit introuvable !");
-			mv.setViewName("redirect:/user/produits");
+			mv.setViewName("redirect:/produits");
 		}
 		return mv;
 	}
@@ -131,8 +134,14 @@ public class ProduitController {
 		for (Iterator iterator = produits.iterator(); iterator.hasNext();) {
 			Produit produit = (Produit) iterator.next();
 			byte[] imageBin = produit.getImage();
+
+			System.out.println(imageBin);
+			if(imageBin != null) {
+			
 			String image64 = Base64Utils.encodeToString(imageBin);
 			produit.setImage64(image64);
+			System.out.println(image64);
+			}
 		
 		}
 	}

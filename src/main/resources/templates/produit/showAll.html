@@ -10,21 +10,27 @@
 	
 	<h1>Liste des produits :</h1>
 
-	<table class="table">
+	<table class="table" th:fragment="tableProduits">
 		<tr>
 			<th>N°</th>
 			<th>Id</th>
 			<th>Nom</th>
 			<th>Categorie</th>
 			<th>Quantite Disponible</th>
-			<th>Action</th>
+			<th>Image</th>
 		</tr>
 		<tr th:each="produit , produitStat: ${produits}">
 			<td th:text="${produitStat.count}">0</td>
 			<td th:text="${produit.id}">produit</td>
 			<td th:text="${produit.nom}">produit</td>
-			<td th:text="${produit.categorie}">produit</td>
+			<td th:text="${produit.categories}">produit</td>
 			<td th:text="${produit.quantiteDisponible}">produit</td>
+			<td>
+				<img src="#" width="50" height="100" alt="" th:src="|data:image/png;base64, ${produit.image64}|">
+				<!-- <img alt="" th:src="'data:image/png;base64, '+${produit.image64}"> -->
+			
+			</td>
+			
 			<td>
 				<div class="btn-group" role="group" aria-label="Basic example">
 					<a type="button" class="btn btn-success" href="#" th:href="@{/user/produit/{id}(id=${produit.id})}">Afficher
