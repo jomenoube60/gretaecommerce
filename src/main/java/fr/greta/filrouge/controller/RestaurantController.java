@@ -37,12 +37,15 @@ public class RestaurantController {
 		mv.addObject("categorie" , categorieList);
 		return mv;
 	}
-	
-	@RequestMapping(value = {"/chercher-produit"}, method = RequestMethod.GET) 
-	public  ModelAndView rechercherProduitParMotClé(ModelAndView mv, @RequestParam(name = "query") String query) {
-		mv.setViewName("rechercher");
+
+	@RequestMapping(value = {"/recherche"}, method = RequestMethod.GET)
+	public  ModelAndView rechercherParMotClé(ModelAndView mv, @RequestParam(name = "query") String query) {
 		List <Categorie> categorieList = categorieRepo.findByNomContaining(query);
-		mv.addObject("categorie" , categorieList);
+		query = query.toLowerCase();
+		mv.addObject("categorieList" , categorieList);
+
+		mv.addObject("query" , query);
+		mv.setViewName("restaurant/resultat_recherche");
 		return mv;
 	}
 }
