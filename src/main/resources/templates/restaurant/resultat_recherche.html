@@ -7,6 +7,7 @@
 <body>
 <div th:replace="fragment/main :: navbar"></div>
 <h1 th:text="|Résultat de la recherche pour : ${query}|">Résultat</h1>
+<h2 th:if="categorieList != null">Catégorie</h2>
 	<table class="table" th:fragment="tableCategories">
 
 		<tr th:each="categorie : ${categorieList}">
@@ -17,6 +18,29 @@
 			<td th:text= "${categorie.nom}">nom</td>
 
 		</tr>
+
+
+	</table>
+	<h2 th:if="categorieList != null">Produits</h2>
+
+	<table class="table" th:fragment="tableCategories">
+		<tr th:each="produit : ${produitListParNom}">
+			<td>
+				<img width="50" height="50" th:src="|data:image/png;base64, ${produit.image64}|"/>
+			</td>
+
+			<td th:text= "${produit.nom}">nom</td>
+
+		</tr>
+		<tr th:each="produit : ${produitListParCategorie}">
+			<td>
+				<img width="50" height="50" th:src="|data:image/png;base64, ${produit.image64}|"/>
+			</td>
+
+			<td th:text= "${produit.nom}">nom</td>
+
+		</tr>
+
 	</table>
 
 
