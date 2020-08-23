@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,6 +34,14 @@ public class RestaurantController {
 		}
 
 		List <Categorie> categorieList = categorieRepo.findAll();
+		mv.addObject("categorie" , categorieList);
+		return mv;
+	}
+	
+	@RequestMapping(value = {"/chercher-produit"}, method = RequestMethod.GET) 
+	public  ModelAndView rechercherProduitParMotClé(ModelAndView mv, @RequestParam(name = "query") String query) {
+		mv.setViewName("rechercher");
+		List <Categorie> categorieList = categorieRepo.findByNomContaining(query);
 		mv.addObject("categorie" , categorieList);
 		return mv;
 	}
