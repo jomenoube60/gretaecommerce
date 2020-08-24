@@ -39,7 +39,7 @@ public class RestaurantController {
 		}
 
 		List <Categorie> categorieList = categorieRepo.findAll();
-		mv.addObject("categorie" , categorieList);
+		mv.addObject("categorieList" , categorieList);
 		return mv;
 	}
 
