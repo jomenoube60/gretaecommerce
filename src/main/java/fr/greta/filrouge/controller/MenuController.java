@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.greta.filrouge.MenuRepository;
+import fr.greta.filrouge.repos.MenuRepository;
 import fr.greta.filrouge.model.Menu;
 
 

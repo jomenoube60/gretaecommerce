@@ -1,4 +1,4 @@
-package fr.greta.filrouge;
+package fr.greta.filrouge.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

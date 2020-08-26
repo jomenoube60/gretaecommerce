@@ -1,14 +1,13 @@
 package fr.greta.filrouge.repos;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.validation.Valid;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import fr.greta.filrouge.model.Produit;
 
-public interface ProduitRepository {
+public interface ProduitRepository extends JpaRepository<Produit, Integer> {
 
-	
+	List<Produit> findByNomContaining(String nomProduit);
 
 }
