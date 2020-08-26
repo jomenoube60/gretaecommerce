@@ -21,15 +21,15 @@
 		</tr>
 		<tr th:each="produit , produitStat: ${produits}">
 			<td th:text="${produitStat.count}">0</td>
-			<td th:text="${produit.id}">produit</td>
+			<!-- <td th:text="${produit.id}">produit</td> -->
 			<td th:text="${produit.nom}">produit</td>
 			<td th:text="${produit.categorie}">produit</td>
 			<td th:text="${produit.quantiteDisponible}">produit</td>
 			<td>
 				<div class="btn-group" role="group" aria-label="Basic example">
-					<a type="button" class="btn btn-success" href="#" th:href="@{/user/produit/{id}(id=${produit.id})}">Afficher
+					<a type="button" class="btn btn-success" href="#" th:href="@{/produit/{id}(id=${produit.id})}">Afficher
 						</a> <a type="button" class="btn btn-primary" href="#"
-				th:href="@{/retaurateur/produit/update/{id}(id=${produit.id})}">Modifier
+				th:href="@{/restaurateur/produit/update/{id}(id=${produit.id})}">Modifier
 							</a> <a type="button" class="btn btn-danger" href="#"
 				th:href="@{/restaurateur/produit/delete/{id}(id=${produit.id})}">Supprimer
 								</a>

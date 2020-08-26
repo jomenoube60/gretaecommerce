@@ -10,7 +10,7 @@
 	<h1>Modifier un  un produit :</h1>
 
 
-	<form action="#" th:action="@{/restaurateur/produit/update/{id}}" th:object="${product}" method="post">
+	<form action="#" th:action="@{/restaurateur/produit/update/{id}}" th:object="${produit}" method="post">
 		<input type="text" th:field="*{id}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">errors</p>
 		<input type="text" th:field="*{nom}" th:errorclass="errorField">

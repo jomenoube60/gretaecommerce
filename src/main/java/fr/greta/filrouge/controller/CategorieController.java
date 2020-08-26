@@ -56,7 +56,7 @@ public class CategorieController {
 	@GetMapping("/restaurateur/categorie/add")
 	public ModelAndView afficherAddForm(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		Categorie categorie = new Categorie ();
+		Categorie categorie = new Categorie();
 		mv.addObject("categorie", categorie);
 		mv.setViewName("categorie/ajoutForm");
 		return mv;
@@ -116,10 +116,11 @@ public class CategorieController {
 			Categorie categorie = categorieOpt.get();
 			mv.addObject("categorie", categorie);
 			mv.setViewName("categorie/afficher");
-		}
-		else {
+			System.out.println(categorie);
+		} else {
 			redirectAttrs.addFlashAttribute("erreurMsg", "Catégorie introuvable !");
 			mv.setViewName("redirect:/categorie");
+			System.out.println("non");
 		}
 		return mv;
 	}

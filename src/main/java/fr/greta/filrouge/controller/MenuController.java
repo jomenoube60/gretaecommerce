@@ -45,7 +45,7 @@ public class MenuController {
 			Menu menu = menuOpt.get();
 			mv.addObject(menu);
 		} else {
-			redirectAttrs.addAttribute("erreurMsg", "Livre introuvable");
+			redirectAttrs.addAttribute("erreurMsg", "Menu introuvable");
 			
 		}
 		return mv;
