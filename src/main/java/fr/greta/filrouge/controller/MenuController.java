@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -97,9 +98,18 @@ public class MenuController {
 	}
 
 	@PostMapping("/menu/restaurateur/delete/{id}")
-	public ModelAndView deleteAction(ModelAndView mv, @PathVariable("id") int id) {
-		mv.setViewName("/menu/delete");
-		return mv;
+	@ResponseBody
+	public boolean deleteAction(ModelAndView mv, @PathVariable("id") int id) {
+		try {
+			Optional <Menu>  menuOpt = menuRepos.findById(id);
+			Menu menu = menuOpt.get();
+			menu.setActif(false);
+			menuRepos.save(menu);
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
 	}
 
 }
