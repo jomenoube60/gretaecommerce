@@ -11,8 +11,10 @@
 		<tr>
 			<th>Image</th>
 			<th>Nom</th>
+			<th>Action</th>
 		</tr>
-		<tr th:each="categorie, categorieStat : ${categories}">
+		<tr th:each="categorie, categorieStat : ${categories}" th:if="!${categorie.actif}" >
+			
 			<td>
 				<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
 			</td>
@@ -36,13 +38,15 @@
 				</a>		
 			
 				<a type="button"
-					class="btn btn-danger deleteCategorieBtn"
+					class="btn btn-primary activeCategorieBtn"
 					href="#"
 					
-					th:href="@{/restaurateur/categorie/delete/{id}(id=${categorie.id})}" 
+					th:href="@{/restaurateur/categorie/activer/{id}(id=${categorie.id})}" 
 					data-th-success-url="@{/categorie}">
-					Supprimer
+					Activer
 				</a>
+				
+				
 			</td>
 		</tr>	
 	</table>

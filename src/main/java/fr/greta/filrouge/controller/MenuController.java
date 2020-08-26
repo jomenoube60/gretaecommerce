@@ -7,12 +7,15 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,14 +25,15 @@ import fr.greta.filrouge.repos.MenuRepository;
 
 @Controller
 public class MenuController {
-	
+
 	@Autowired
 	private MenuRepository menuRepos;
 
+	Logger logger = LoggerFactory.getLogger(ProduitController.class);
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
 		List<Menu> menus = menuRepos.findAll();
-		
+
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("menus", menus);
 
@@ -46,7 +50,7 @@ public class MenuController {
 			mv.addObject(menu);
 		} else {
 			redirectAttrs.addAttribute("erreurMsg", "Livre introuvable");
-			
+
 		}
 		return mv;
 	}
@@ -72,20 +76,40 @@ public class MenuController {
 
 	@GetMapping("/menu/restaurateur/update/{id}")
 	public ModelAndView updateFormAction(ModelAndView mv , @PathVariable("id") int id) {
+		Optional<Menu> menuOpt = menuRepos.findById(id);
+		Menu menu = menuOpt.get();
+		mv.addObject("menu", menu);
 		mv.setViewName("/menu/update");
 		return mv;
 	}
 
 	@PostMapping("/menu/restaurateur/update/{id}")
-	public ModelAndView updateAction(ModelAndView mv , @PathVariable("id") int id) {
-		mv.setViewName("/menu/update");
-		return mv;
+	public String updateAction(@Valid Menu menu, BindingResult errors ) {
+		logger.info(errors.toString());
+		System.out.println(menu);
+		if (!errors.hasErrors()){
+
+			menuRepos.save(menu);
+			return "redirect:/menu";
+		}
+		else {
+			return "/menu/update";
+		}
 	}
 
 	@PostMapping("/menu/restaurateur/delete/{id}")
-	public ModelAndView deleteAction(ModelAndView mv, @PathVariable("id") int id) {
-		mv.setViewName("/menu/delete");
-		return mv;
+	@ResponseBody
+	public boolean deleteAction(ModelAndView mv, @PathVariable("id") int id) {
+		try {
+			Optional <Menu>  menuOpt = menuRepos.findById(id);
+			Menu menu = menuOpt.get();
+			menu.setActif(false);
+			menuRepos.save(menu);
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
 	}
 
 }
