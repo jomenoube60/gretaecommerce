@@ -108,7 +108,7 @@ public class ProduitController {
 		}
 		else {
 			redirectAttrs.addFlashAttribute("erreurMsg", "Produit introuvable !");
-			mv.setViewName("redirect:/user/produits");
+			mv.setViewName("redirect:/produits");
 		}
 		return mv;
 	}
