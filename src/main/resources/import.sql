@@ -2,11 +2,9 @@ insert into restaurant (id , nom , adresse) values (1 , "Restaurant test" , "Rue
 
 insert into menu (id , nom , prixHT , actif , disponible )values (null , "Menu Végétarien" , 18.99 , 1 , 1),(null ,"Menu Enfant" , 18.99 , 1 , 1),(null , "Menu 20 euros" , 20.00 , 1 , 1),(null , "Menu Végétarien" , 18.99 , 1 , 1),(null , "Menu Végétarien" , 18.99 , 1 , 1);
 
-<<<<<<< HEAD
+
 insert into categorie (id , nom , restaurant_id , categorie_parente_id , image ,actif) values (null , "poisson" , 1 , null , null,1), (null , "viande" , 1 , null , null,1), (null , "dessert" , 1 , null , null,1), (null , "entrée" , 1 , null , null,1), (null , "boisson" , 1 , null , null,1);
-=======
-insert into categorie (id , nom , restaurant_id , categorie_parente_id , image) values (null , "poisson" , 1 , null , null), (null , "viande" , 1 , null , null), (null , "dessert" , 1 , null , null), (null , "entrée" , 1 , null , null), (null , "boisson" , 1 , null , null);
->>>>>>> eee57d4e3e3793689c72cf2aeb5eb0a9af59df3d
+
 
 insert into produit (id , nom , quantite_disponible) values (null , "Steak+Frites"  , 1),(null , "Pates Bolognaises"  , 1),(null , "Dame Blanche"  , 1),(null , "Coca" , 1),(null , "Poisson pané" , 1);
 
