@@ -34,6 +34,8 @@ public class Categorie {
 
 	@Transient
 	private String image64;
+	
+	private boolean actif;
 
 	public String getImage64() {
 		return image64;
@@ -90,6 +92,16 @@ public class Categorie {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
+	public boolean isActif() {
+		return actif;
+	}
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+
+	
 
 
 

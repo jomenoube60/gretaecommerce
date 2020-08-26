@@ -40,13 +40,24 @@ public class CategorieController {
 	Logger logger = LoggerFactory.getLogger(CategorieController.class);
 
 	@GetMapping("/categorie")
-	public ModelAndView afficherLivres(ModelAndView mv) {
+	public ModelAndView afficherCategories(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
 		addImage64(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
 
-		mv.setViewName("categorie/afficherTous");
+		mv.setViewName("categorie/afficherActifs");
+		return mv;
+	}
+	
+	@GetMapping("/categorie/activer")
+	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
+		List<Categorie> categories = cateRepos.findAll();
+		addImage64(categories);
+		mv.addObject("isRestaurateur", true);
+		mv.addObject("categories", categories);
+
+		mv.setViewName("categorie/afficherDesactifs");
 		return mv;
 	}
 
@@ -92,11 +103,14 @@ public class CategorieController {
 		}
 	}
 
-	@PostMapping ("/restaurateur/categorie/delete/{id}")
+	@PostMapping ("/restaurateur/categorie/desactiver/{id}")
 	@ResponseBody
-	public boolean traiterDeleteForm(@PathVariable int id) {
+	public boolean traiterDesactiverForm(@PathVariable int id) {
 		try {
-			cateRepos.deleteById(id);
+			Optional<Categorie> categorieOpt = cateRepos.findById(id);
+			Categorie categorie = categorieOpt.get();
+			categorie.setActif(false);
+			cateRepos.save(categorie);
 			return true;
 		}
 		catch (Exception ex) {
@@ -105,6 +119,22 @@ public class CategorieController {
 
 	}
 
+	@PostMapping ("/restaurateur/categorie/activer/{id}")
+	@ResponseBody
+	public boolean traiterActiverForm(@PathVariable int id) {
+		try {
+			Optional<Categorie> categorieOpt = cateRepos.findById(id);
+			Categorie categorie = categorieOpt.get();
+			categorie.setActif(true);
+			cateRepos.save(categorie);
+			return true;
+		}
+		catch (Exception ex) {
+			return false;
+		}
+
+	}
+	
 	@GetMapping("/categorie/{id}")
 	public ModelAndView afficherCategorie(ModelAndView mv, @PathVariable int id, RedirectAttributes redirectAttrs) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
