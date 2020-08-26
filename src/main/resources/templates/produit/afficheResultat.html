@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/main :: head">
+<meta charset="UTF-8">
+<title>Liste des produits</title>
+</head>
+<body>
+	<div th:replace="fragment/main :: navbar"></div>
+		<p th:if="${erreurMsg}" th:text="${erreurMsg}" class="erreurMsg">error</p>
+	
+	<h1>Résultat(s) pour votre recherche :</h1>
+	<h2 th:text="${nomProduit}">0</h2>
+	<div th:insert="~produit/showAll :: tableProduits">table de produits</div>
+	
+	<div th:replace="fragment/main :: footer"></div>
+
+</body>
+</html>
