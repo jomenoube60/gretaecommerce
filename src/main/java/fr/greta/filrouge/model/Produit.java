@@ -17,11 +17,13 @@ public class Produit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nom;
-	@NotBlank(message = "Nom de produit ne pas être vide !")
 	
+	@NotBlank(message = "Nom de produit ne pas être vide !")
+	private String nom;
+		
 	@ManyToMany
 	private List<Categorie> categories;
+	
 	private int quantiteDisponible;
 	
 	@Lob

@@ -6,8 +6,22 @@
 </head>
 <body>
 <div th:replace="fragment/main :: navbar"></div>
-<h1>Afficher une catégorie</h1>
-
+<h1 th:text= "${categorie.nom}">Afficher une catégorie</h1>
+<table class="table" th:fragment="tableCategories">
+	<tr>
+			<th>Image</th>
+			<th>Nom</th>
+			
+	</tr>
+	<tr action="#" th:action="@{/categorie/{id}(id=${categorie.id}) }"
+					 th:object="${categorie}" 
+					 method="post"></tr>
+	<td>
+		<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
+	</td>
+	<td th:text= "${categorie.nom}">nom</td>
+	
+</table>
 
 <footer th:replace="fragment/main :: footer"></footer>
 </body>
