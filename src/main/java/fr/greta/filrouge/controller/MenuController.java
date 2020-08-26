@@ -22,14 +22,14 @@ import fr.greta.filrouge.repos.MenuRepository;
 
 @Controller
 public class MenuController {
-	
+
 	@Autowired
 	private MenuRepository menuRepos;
 
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
 		List<Menu> menus = menuRepos.findAll();
-		
+
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("menus", menus);
 
@@ -46,7 +46,7 @@ public class MenuController {
 			mv.addObject(menu);
 		} else {
 			redirectAttrs.addAttribute("erreurMsg", "Livre introuvable");
-			
+
 		}
 		return mv;
 	}
@@ -72,6 +72,9 @@ public class MenuController {
 
 	@GetMapping("/menu/restaurateur/update/{id}")
 	public ModelAndView updateFormAction(ModelAndView mv , @PathVariable("id") int id) {
+		Optional<Menu> menuOpt = menuRepos.findById(id);
+		Menu menu = menuOpt.get();
+		mv.addObject("menu", menu);
 		mv.setViewName("/menu/update");
 		return mv;
 	}
