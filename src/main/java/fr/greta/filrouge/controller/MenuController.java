@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ public class MenuController {
 	@Autowired
 	private MenuRepository menuRepos;
 
+	Logger logger = LoggerFactory.getLogger(ProduitController.class);
 	@GetMapping("/menu")
 	public ModelAndView showAllAction(ModelAndView mv) {
 		List<Menu> menus = menuRepos.findAll();
@@ -80,9 +83,17 @@ public class MenuController {
 	}
 
 	@PostMapping("/menu/restaurateur/update/{id}")
-	public ModelAndView updateAction(ModelAndView mv , @PathVariable("id") int id) {
-		mv.setViewName("/menu/update");
-		return mv;
+	public String updateAction(@Valid Menu menu, BindingResult errors ) {
+		logger.info(errors.toString());
+		System.out.println(menu);
+		if (!errors.hasErrors()){
+
+			menuRepos.save(menu);
+			return "redirect:/menu";
+		}
+		else {
+			return "/menu/update";
+		}
 	}
 
 	@PostMapping("/menu/restaurateur/delete/{id}")
