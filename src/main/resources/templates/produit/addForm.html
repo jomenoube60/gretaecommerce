@@ -15,6 +15,8 @@
 		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
 		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
+		<input type="text" th:field="*{prixHt}" th:errorclass="errorField">
+		<p th:if="${#fields.hasErrors('prixHt')}" th:errors="*{prixHt}">errors</p>
 		<select th:field="*{categories}" multiple="multiple">
 			<option th:each="cat : ${categorieList}"
 					th:text="${cat.nom}"
@@ -22,9 +24,9 @@
 					categorie
 			</option>
 		</select>
-		
+
 		<input type="file" th:field="*{image}">
-		
+
 		<input type="submit" value="Ajouter">
 	</form>
 
