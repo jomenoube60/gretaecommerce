@@ -1,4 +1,6 @@
-$(function(){
+
+
+	$(function(){
 //	console.log("dans jquery");
 //	let csrfHeaderMeta = $("meta[name=csrfHeaderName]");
 //	let csrfHeaderName = $(csrfHeaderMeta).attr("content");
@@ -9,7 +11,7 @@ $(function(){
 //		xhr.setRequestHeader(csrfHeaderName, csrfToken);
 //	});
 
-	// Factorisation de la requete POST AJAX
+		// Factorisation de la requete POST AJAX
 	let post = function(url , successUrl) {
 	//créer la réquete POST AJAX
 		console.log("ajax");

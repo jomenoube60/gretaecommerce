@@ -11,6 +11,8 @@ public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
 	
 
 	List<Categorie> findByNomContaining(String nomCategorie);
+	
+	List <Categorie> findByActif(boolean bool);
 
 	
 

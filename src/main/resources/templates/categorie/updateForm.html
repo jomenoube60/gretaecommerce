@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <title>Modifier une catégorie</title>
 </head>
-<body>
+<body class="container">
 	<div th:replace="fragment/main :: navbar"></div>
-	
+
 	<h1>Modifier une categorie :</h1>
-	
+
 	<form action="#" th:action="@{/restaurateur/categorie/update/{id}(id=${categorie.id}) }"
-					 th:object="${categorie}" 
+					 th:object="${categorie}"
 					 method="post">
 		<input type="text" th:field="*{id}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('id')}" th:errors= "*{id}">>errors</p>
@@ -18,7 +18,7 @@
 		<p th:if="${#fields.hasErrors('nom')}" th:errors= "*{nom}">>errors</p>
 		<input type="submit" value="Mettre à jour">
 	</form>
-	
+
 	<footer th:replace="fragment/main :: footer"></footer>
 </body>
 </html>

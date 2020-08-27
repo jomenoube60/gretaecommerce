@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Menu implements Serializable {
@@ -24,6 +26,12 @@ public class Menu implements Serializable {
 
 	@ManyToMany
 	private List <Produit> produits;
+	
+	@Lob
+	private byte[] image;
+	
+	@Transient
+	private String image64;
 
 	public int getId() {
 		return id;
@@ -74,6 +82,22 @@ public class Menu implements Serializable {
 
 	public void setActif(boolean actif) {
 		this.actif = actif;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public String getImage64() {
+		return image64;
+	}
+
+	public void setImage64(String image64) {
+		this.image64 = image64;
 	}
 
 

@@ -14,17 +14,11 @@
 
 	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner">
-	    <div style="background-color: black;color: white" class="carousel-item active">
-				<h1>MENU 1</h1>
-	      <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
-	    </div>
-	    <div style="background-color: black;color: white" class="carousel-item">
-				<h1>MENU 2</h1>
-	      <!-- <img class="d-block w-100" src="..." alt="Second slide"> -->
-	    </div>
-	    <div style="background-color: black;color: white" class="carousel-item">
-				<h1>MENU 3</h1>
-	      <!-- <img class="d-block w-100" src="..." alt="Third slide"> -->
+	    <div th:each="menu ,stats : ${menuList}" style="background-color: black;color: white" th:classappend="${stats.index  == 0} ? 'carousel-item active' : 'carousel-item'" >
+	      	<img class="d-block w-100" src="#"  alt="First slide">
+	      	<div class="carousel-caption d-none d-md-block">
+                <h1 th:text="${menu.nom}">Menu 1</h1>
+            </div>	
 	    </div>
 	  </div>
 	  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -36,43 +30,70 @@
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
-
-		<div>
-		<div class="accueil-categorie row">
-			<div th:each="cat1 , index : ${categorieList}"  th:if="${index.index} < 3" class="col-md-4">
-				<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}" >
-					<div >
-						<h1 th:text="${cat1.nom}">Categorie</h1>
-						<div class="">
-							<img src="#" th:src="${cat1.image64}" alt="image1">
-						</div>
-						<article>BLABLABLA</article>
-					</div>
-				</a>
-
-			</div>
-		</div>
-		<div class="accueil-categorie row">
-			<div th:each="cat1 , index : ${categorieList}"  th:if="${index.index} > 3" class="col-md-4">
-				<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}" >
-					<div >
-						<h1 th:text="${cat1.nom}">Categorie</h1>
-						<div class="">
-							<img src="#" th:src="${cat1.image64}" alt="image1">
-						</div>
-						<article>BLABLABLA</article>
-					</div>
-				</a>
-
-			</div>
-		</div>
-	</div>
-
-
 	<div>
-		<h1>INFORMATION SUR LE RESTAURANT / PRESENTATION</h1>
-		<h1>CARTE GOOGLE MAP</h1>
+		<div row>
+		<div class="card-deck mt-4">
+			<div class="card col-6 mb-2" th:each="cat1 , index : ${categorieList}"  th:if="${index.index} < 3">
+    			<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}"><img class="card-img-top" src="#" th:src="${cat1.image64}" alt="image1"></a>
+    			<div class="card-body">
+      				<h5 class="card-title" th:text="${cat1.nom}">Catégorie</h5>
+      				<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    			</div>
+    			<div class="card-footer">
+      				<small class="text-muted">Last updated 3 mins ago</small>
+    			</div>
+  			</div>
+  		</div>
+  		<div class="card-deck mt-4">
+			<div class="card col-6" th:each="cat1 , index : ${categorieList}"  th:if="${index.index < 2 and index.index > 6}" >
+    			<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}"><img class="card-img-top" src="#" th:src="${cat1.image64}" alt="image1"></a>
+    			<div class="card-body">
+      				<h5 class="card-title" th:text="${cat1.nom}">Catégorie</h5>
+      				<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    			</div>
+    			<div class="card-footer">
+      				<small class="text-muted">Last updated 3 mins ago</small>
+    			</div>
+  			</div>
+  		</div>	
+		</div>
 	</div>
+
+
+
+	<div class="mt-4">
+		<h1>INFORMATION SUR LE RESTAURANT / PRESENTATION</h1>
+	</div>
+	
+	<!-- Début carte -->
+<h1>Nous situer ?</h1>
+<section class="mt-5">
+	<div class="container">
+		<div class="row pb-5">
+						<div class="col-12 d-flex flex-column">
+				<h3 class="text-uppercase text-white pb-3">contact details</h3>
+				<a href="mailto:contact@gretacompiegne.fr" class="pb-3 text-secondary">contact@gretacompiegne.fr</a>
+				<a href="tel:+33344000000" class="pb-3 text-secondary">03 44 00 00 00</a>
+
+				<address class="text-secondary">
+					rue Ammédé Boucquerel <br/>
+					2ème étage à droite <br/>
+					60200 Compiègne
+				</address>
+				<div class="embed-responsive embed-responsive-1by1">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2596.0021681783146!2d2.826436315135861!3d49.408864679345236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e7d42fd350e39f%3A0xbce4f254cdcc97f2!2sGRETA%20Oise%2C%20Agence%20de%20Compi%C3%A8gne!5e0!3m2!1sfr!2sfr!4v1598533711131!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+					</iframe>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Fin du Formulaire -->
+	
+	
+	
 	<footer th:replace="fragment/main :: footer"></footer>
 </body>
 </html>

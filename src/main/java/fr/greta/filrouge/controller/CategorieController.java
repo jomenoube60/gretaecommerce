@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.greta.filrouge.model.Categorie;
+import fr.greta.filrouge.model.Produit;
 import fr.greta.filrouge.repos.CategorieRepository;
+import fr.greta.filrouge.repos.ProduitRepository;
 
 
 
@@ -37,23 +39,28 @@ public class CategorieController {
 	@Autowired
 	private CategorieRepository cateRepos;
 
+	@Autowired
+	private ProduitRepository produitRepos;
+
 	Logger logger = LoggerFactory.getLogger(CategorieController.class);
 
 	@GetMapping("/categorie")
 	public ModelAndView afficherCategories(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		addImage64(categories);
+		addImage64Categorie(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
 
 		mv.setViewName("categorie/afficherActifs");
 		return mv;
 	}
+
 	
-	@GetMapping("/categorie/activer")
-	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
+	@GetMapping("/categorie/inactifs")
+
+public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		addImage64(categories);
+		addImage64Categorie(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
 
@@ -134,14 +141,17 @@ public class CategorieController {
 		}
 
 	}
-	
+
 	@GetMapping("/categorie/{id}")
 	public ModelAndView afficherCategorie(ModelAndView mv, @PathVariable int id, RedirectAttributes redirectAttrs) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
 // tester si categorie existe
 		if(categorieOpt.isPresent()) {
 			Categorie categorie = categorieOpt.get();
+			List <Produit> produitList = produitRepos.getFindByCategories_Id(categorie.getId());
+			addImage64Produit(produitList);
 			mv.addObject("categorie", categorie);
+			mv.addObject("produitList" , produitList);
 			mv.setViewName("categorie/afficher");
 			System.out.println(categorie);
 		} else {
@@ -152,7 +162,7 @@ public class CategorieController {
 		return mv;
 	}
 
-	private void addImage64(List<Categorie> categories) {
+	private void addImage64Categorie(List<Categorie> categories) {
 		for (Iterator iterator = categories.iterator(); iterator.hasNext();) {
 			Categorie categorie = (Categorie) iterator.next();
 			if(categorie.getImage() != null) {
@@ -164,6 +174,15 @@ public class CategorieController {
 		}
 	}
 
+	private void addImage64Produit(List<Produit> produitList) {
+		for (Iterator iterator = produitList.iterator(); iterator.hasNext();) {
+			Produit produit = (Produit) iterator.next();
+			if(produit.getImage() != null) {
+				byte[] imageBin = produit.getImage();
+				String image64 = Base64Utils.encodeToString(imageBin);
+				produit.setImage64(image64);
+			}
 
-
+		}
+	}
 }
