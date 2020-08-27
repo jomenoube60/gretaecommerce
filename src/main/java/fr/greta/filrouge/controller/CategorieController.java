@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.greta.filrouge.model.Categorie;
+import fr.greta.filrouge.model.Produit;
 import fr.greta.filrouge.repos.CategorieRepository;
+import fr.greta.filrouge.repos.ProduitRepository;
 
 
 
@@ -37,6 +39,9 @@ public class CategorieController {
 	@Autowired
 	private CategorieRepository cateRepos;
 
+	@Autowired
+	private ProduitRepository produitRepos;
+
 	Logger logger = LoggerFactory.getLogger(CategorieController.class);
 
 	@GetMapping("/categorie")
@@ -49,7 +54,7 @@ public class CategorieController {
 		mv.setViewName("categorie/afficherActifs");
 		return mv;
 	}
-	
+
 	@GetMapping("/categorie/activer")
 	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
@@ -134,14 +139,16 @@ public class CategorieController {
 		}
 
 	}
-	
+
 	@GetMapping("/categorie/{id}")
 	public ModelAndView afficherCategorie(ModelAndView mv, @PathVariable int id, RedirectAttributes redirectAttrs) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
 // tester si categorie existe
 		if(categorieOpt.isPresent()) {
 			Categorie categorie = categorieOpt.get();
+			List <Produit> produitList = produitRepos.getFindByCategories_Id(categorie.getId());
 			mv.addObject("categorie", categorie);
+			mv.addObject("produitList" , produitList);
 			mv.setViewName("categorie/afficher");
 		}
 		else {

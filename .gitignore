@@ -40,4 +40,3 @@ mvnw.cmd
 pom.xml
 src/main/resources/application.properties
 .attach*
-src/main/resources/import.sql
