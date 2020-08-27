@@ -50,7 +50,7 @@ public class CategorieController {
 		return mv;
 	}
 	
-	@GetMapping("/categorie/activer")
+	@GetMapping("/categorie/inactifs")
 	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
 		addImage64(categories);
