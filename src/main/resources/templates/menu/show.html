@@ -4,33 +4,35 @@
 <meta charset="UTF-8">
 <title>Liste des menus</title>
 </head>
-<body>
+<body class="container">
 	<div th:replace="fragment/main :: navbar"></div>
   <div th:if="${erreurMsg}" th:text="${erreurMsg}"></div>
 
-    <h1 th:text="${menu.nom}">Produit</h1>
+    <h1 > <span th:text="${menu.nom}" ></span> <span class="float-right" th:text="${menu.prixHT} + ' €'"></span></h1>
   <div th:if="${menu}" class="row">
 
   <div class="col-md-8">
   <table class="table">
     		<tr>
     			<th>Nom</th>
-    			<th>Categorie</th>
     		</tr>
     		<tr th:each="produit , menuStat: ${menu.produits}">
-    			<td th:text="${produit.nom}">menu</td>
-    			<td></td>
+    			<td th:text="${produit.nom}">Produit</td>
+    			<td><a href="" th:href="@{/produit/{id}(id=${produit.id})}">Voir</a></td>
 
     		</tr>
+
+
     	</table>
 </div>
-
+<!--
 <div class="col-md-4">
   Autres offres
-</div>
-  	<div th:replace="fragment/main :: footer"></div>
+</div> -->
 
 
   </div>
+
+		<div th:replace="fragment/main :: footer"></div>
 </body>
 </html>

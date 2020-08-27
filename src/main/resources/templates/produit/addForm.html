@@ -9,13 +9,22 @@
 
 	<h1>Ajouter un produit :</h1>
 
-
-	<form action="#" th:action="@{/restaurateur/produit/add}" th:object="${produit}" method="post">
+<!-- Attention à enctype pour la gestion des images base64 -->
+	<form action="#" th:action="@{/restaurateur/produit/add}" th:object="${produit}" method="post" enctype="multipart/form-data">
 		<input type="text" th:field="*{nom}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
 		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
 		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
-
+		<select th:field="*{categories}" multiple="multiple">
+			<option th:each="cat : ${categorieList}"
+					th:text="${cat.nom}"
+					th:value="${cat.id}">
+					categorie
+			</option>
+		</select>
+		
+		<input type="file" th:field="*{image}">
+		
 		<input type="submit" value="Ajouter">
 	</form>
 

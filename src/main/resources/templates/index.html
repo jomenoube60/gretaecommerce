@@ -37,65 +37,34 @@
 	  </a>
 	</div>
 
-	<div class="accueil-categorie">
-		<div class="row accueil-categorie">
-			<a href="#" th:href="@{/categorie/1}" class="col-md-4">
-				<div >
-					<h1 >Categorie 1</h1>
-					<div class="">
-						<img src="#" alt="image1">
+		<div>
+		<div class="accueil-categorie row">
+			<div th:each="cat1 , index : ${categorieList}"  th:if="${index.index} < 3" class="col-md-4">
+				<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}" >
+					<div >
+						<h1 th:text="${cat1.nom}">Categorie</h1>
+						<div class="">
+							<img src="#" th:src="${cat1.image64}" alt="image1">
+						</div>
+						<article>BLABLABLA</article>
 					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
-			<a href="#" th:href="@{/categorie/2}" class="col-md-4">
-				<div >
-					<h1 >Categorie 2</h1>
-					<div class="">
-						<img src="#" alt="image2">
-					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
-			<a href="" th:href="@{/categorie/3}" class="col-md-4">
-				<div >
-					<h1 >Categorie 3</h1>
-					<div class="">
-						<img src="#" alt="image3">
-					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
-		</div>
+				</a>
 
-		<div class="row">
-			<a href="#" th:href="@{/categorie/4}" class="col-md-4">
-				<div >
-					<h1 >Categorie 4</h1>
-					<div class="">
-						<img src="#" alt="image4">
+			</div>
+		</div>
+		<div class="accueil-categorie row">
+			<div th:each="cat1 , index : ${categorieList}"  th:if="${index.index} > 3" class="col-md-4">
+				<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}" >
+					<div >
+						<h1 th:text="${cat1.nom}">Categorie</h1>
+						<div class="">
+							<img src="#" th:src="${cat1.image64}" alt="image1">
+						</div>
+						<article>BLABLABLA</article>
 					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
-			<a href="#" th:href="@{/categorie/5}" class="col-md-4">
-				<div >
-					<h1 >Categorie 5</h1>
-					<div class="">
-						<img src="#" alt="image5">
-					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
-			<a href="#" th:href="@{/categorie/6}" class="col-md-4">
-				<div >
-					<h1 >Categorie 6</h1>
-					<div class="">
-						<img src="#" alt="image6">
-					</div>
-					<article>BLABLABLA</article>
-				</div>
-			</a>
+				</a>
+
+			</div>
 		</div>
 	</div>
 

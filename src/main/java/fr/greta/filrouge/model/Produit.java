@@ -17,17 +17,23 @@ public class Produit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nom;
-	@NotBlank(message = "Nom de produit ne pas être vide !")
 	
+	@NotBlank(message = "Nom de produit ne pas être vide !")
+	private String nom;
+		
 	@ManyToMany
 	private List<Categorie> categories;
+	
 	private int quantiteDisponible;
 	
 	@Lob
 	private byte[] image;
+	
 	@Transient
 	private String image64;
+
+	public boolean actif;
+	
 	/**
 	 * @return the id
 	 */
@@ -99,6 +105,14 @@ public class Produit implements Serializable {
 	 */
 	public void setImage64(String image64) {
 		this.image64 = image64;
+	}
+	
+	public boolean isActif() {
+		return actif;
+	}
+	
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 	
 		

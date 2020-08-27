@@ -6,19 +6,67 @@
 </head>
 <body>
 	<div th:replace="fragment/main :: navbar"></div>
+<div class="container">
 
-	<h1>Modifier un  un produit :</h1>
+
+	<h1>Modifier un produit :</h1>
 
 
-	<form action="#" th:action="@{/restaurateur/produit/update/{id}}" th:object="${produit}" method="post">
-		<input type="text" th:field="*{id}" th:errorclass="errorField">
+	<form action="#" th:action="@{/restaurateur/produit/update/{id}}"
+	 th:object="${produit}"
+	  method="post" enctype="multipart/form-data">
+	  	<div class="row">
+	  <div class="col-8">
+	  	
+	  
+	  <div class="form-group">
+	  	<label for="index">N°</label>
+	  	<input type="text" th:field="*{id}" th:errorclass="errorField" class="form-control">
 		<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">errors</p>
-		<input type="text" th:field="*{nom}" th:errorclass="errorField">
+	  </div>
+	  <div class="form-group">
+	  	<label for="titre">Titre</label>
+	  	<input type="text" th:field="*{nom}" th:errorclass="errorField" class="form-control">
 		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
-		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
+	  </div>
+	  <div class="form-group">
+	  	<label for="quantite">Quantite</label>
+	  	<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField" class="form-control">
 		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
-		<input type="submit" value="Ajouter">
+	  </div>
+	  <div class="form-group">
+	  	<label for="categories">Categorie(s)</label>
+	  	<select th:field="*{categories}" multiple="multiple" class="form-control">
+			<option th:each="cat : ${categorieList}"
+					th:text="${cat.nom}"
+					th:value="${cat.id}">
+					categorie
+			</option>
+		</select>
+	  </div>
+	  </div>
+	  
+	  <div class="col-4">
+		  
+	  <div class="form-group">
+	  	<img th:src="|data:image/png;base64, ${produit.image64}|" class="rounded mx-auto d-block img-fluid"/>
+	  </div>
+		
+	  <div class="form-group">
+	  	<label for="imageBrut">Nouvelle image</label>
+	  	<input type="file" name="imageBrut" class = "form-control">
+	  	<p th:if="${#fields.hasErrors('image')}" th:errors="*{image}">errors</p>
+	  </div>
+	  </div>
+	  	</div>
+	  
+		<!--  <input type="file" th:field="*{image}">-->
+		
+		
+		
+		<input type="submit" value="Valider les Modifications" class="btn btn-primary">
 	</form>
+</div>
 
 	<div th:replace="fragment/main :: footer"></div>
 
