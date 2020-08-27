@@ -47,7 +47,7 @@ public class CategorieController {
 	@GetMapping("/categorie")
 	public ModelAndView afficherCategories(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		addImage64(categories);
+		addImage64Categorie(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
 
@@ -58,7 +58,7 @@ public class CategorieController {
 	@GetMapping("/categorie/activer")
 	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		addImage64(categories);
+		addImage64Categorie(categories);
 		mv.addObject("isRestaurateur", true);
 		mv.addObject("categories", categories);
 
@@ -147,6 +147,7 @@ public class CategorieController {
 		if(categorieOpt.isPresent()) {
 			Categorie categorie = categorieOpt.get();
 			List <Produit> produitList = produitRepos.getFindByCategories_Id(categorie.getId());
+			addImage64Produit(produitList);
 			mv.addObject("categorie", categorie);
 			mv.addObject("produitList" , produitList);
 			mv.setViewName("categorie/afficher");
@@ -158,7 +159,7 @@ public class CategorieController {
 		return mv;
 	}
 
-	private void addImage64(List<Categorie> categories) {
+	private void addImage64Categorie(List<Categorie> categories) {
 		for (Iterator iterator = categories.iterator(); iterator.hasNext();) {
 			Categorie categorie = (Categorie) iterator.next();
 			if(categorie.getImage() != null) {
@@ -170,6 +171,15 @@ public class CategorieController {
 		}
 	}
 
+	private void addImage64Produit(List<Produit> produitList) {
+		for (Iterator iterator = produitList.iterator(); iterator.hasNext();) {
+			Produit produit = (Produit) iterator.next();
+			if(produit.getImage() != null) {
+				byte[] imageBin = produit.getImage();
+				String image64 = Base64Utils.encodeToString(imageBin);
+				produit.setImage64(image64);
+			}
 
-
+		}
+	}
 }
