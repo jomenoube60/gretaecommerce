@@ -1,4 +1,6 @@
 package fr.greta.filrouge.controller;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -74,14 +77,35 @@ public class ProduitController {
 	public ModelAndView afficherUpdateForm(ModelAndView mv, @PathVariable int id) {
 		Optional<Produit> produitOpt = produitRepos.findById(id);
 		Produit produit = produitOpt.get();
+		List<Produit> produitimage = new ArrayList<Produit>();
+		produitimage.add(produit);
+		addImage64(produitimage);
+		List<Categorie> categories = categorieRepos.findAll();
+		mv.addObject(categories);
 		mv.addObject("produit", produit);
 		mv.setViewName("/produit/updateForm");
 		return mv;
 	}
 
 	@PostMapping("/restaurateur/produit/update/{id}")
-	public String traiterUpdateForm(@Valid Produit produit, BindingResult errors) {
+	//on utilise MultipartFile dans les paramètres pour récupérer information venant de ma balise html (name="imageBrut")
+	public String traiterUpdateForm(@Valid Produit produit, BindingResult errors, MultipartFile imageBrut) { 
 		if(!errors.hasErrors()) {
+			
+			//on teste si imageBrut(balise hatml) est vide ou pas
+			//si pas vide on remplace l'image d'origine par la nouvelle
+			if(!imageBrut.isEmpty()) {
+				try {
+					byte[] bytes = imageBrut.getBytes();
+					produit.setImage(bytes);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				byte[] image = produitRepos.findById(produit.getId()).get().getImage();
+				produit.setImage(image);
+			}
 			produitRepos.save(produit);
 			return "redirect:/produits";
 		}
@@ -106,6 +130,9 @@ public class ProduitController {
 		Optional<Produit> produitOpt = produitRepos.findById(id);
 		if(produitOpt.isPresent()) {
 			Produit produit = produitOpt.get();
+			List<Produit> produitimage = new ArrayList<Produit>();
+			produitimage.add(produit);
+			addImage64(produitimage);
 			mv.addObject("produit",produit);
 			mv.setViewName("produit/show");	
 		}

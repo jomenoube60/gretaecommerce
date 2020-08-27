@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v4.0.1">
+
 <!--  <meta name="csrfHeaderName" th:content="${_csrf.headerName}">
 <meta name="csrfToken" th:content="${_csrf.token}">-->
 
@@ -58,14 +59,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos Produits</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" th:href="@{/categorie}">Tous nos produits Actifs</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/activer}">Tous nos produits Desactifs</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/1}">Categorie 1</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/2}">Categorie 2</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/3}">Categorie 3</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/4}">Categorie 4</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/5}">Categorie 5</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/6}">Categorie 6</a>
+          <a class="dropdown-item" href="#" th:href="@{/categorie}">Toutes nos catégories Actives</a>
+          <a class="dropdown-item" href="#" th:href="@{/categorie/activer}">Toutes nos catégories Desactivées</a>
+
         </div>
       </li>
 
@@ -73,12 +69,8 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos Menus</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="#" th:href="@{/menu}">Tous nos menus</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/1}">Menu 1</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/2}">Menu 2</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/3}">Menu 3</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/4}">Menu 4</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/5}">Menu 5</a>
-          <a class="dropdown-item" href="#" th:href="@{/menu/6}">Menu 6</a>
+          <a class="dropdown-item" href="#" th:href="@{/menu/restaurateur/add}">Ajouter un menu</a>
+          <a class="dropdown-item" href="#" th:href="@{/produits}">Tous nos produits</a>
         </div>
       </li>
     </ul>

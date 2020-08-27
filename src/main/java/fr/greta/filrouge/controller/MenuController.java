@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.greta.filrouge.model.Categorie;
 import fr.greta.filrouge.model.Menu;
+import fr.greta.filrouge.model.Produit;
 import fr.greta.filrouge.repos.MenuRepository;
 
 
@@ -57,7 +59,9 @@ public class MenuController {
 
 	@GetMapping("/menu/restaurateur/add")
 	public ModelAndView addFormAction(ModelAndView mv) {
+		List<Menu> menus = menuRepos.findAll();
 		Menu menu = new Menu();
+		mv.addObject("menuList", menus);
 		mv.addObject("menu" , menu);
 		mv.setViewName("menu/add");
 
@@ -65,10 +69,16 @@ public class MenuController {
 	}
 
 	@PostMapping("/menu/restaurateur/add")
-	public ModelAndView addAction(ModelAndView mv ,@Valid Menu menu, BindingResult errors) {
+	public ModelAndView traiterAddform(@Valid Menu menu, BindingResult errors, ModelAndView mv) {
+		logger.info(errors.toString());
 		if(!errors.hasErrors()) {
+			menuRepos.save(menu);
 			mv.setViewName("redirect:/menu");
-		} else {
+		}
+		else {
+			
+			List<Menu> menus = menuRepos.findAll();
+			mv.addObject("menuList", menu);
 			mv.setViewName("menu/add");
 		}
 		return mv;
