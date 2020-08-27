@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.greta.filrouge.model.Categorie;
+import fr.greta.filrouge.model.Menu;
 import fr.greta.filrouge.model.Produit;
 import fr.greta.filrouge.model.Restaurant;
 import fr.greta.filrouge.repos.CategorieRepository;
+import fr.greta.filrouge.repos.MenuRepository;
 import fr.greta.filrouge.repos.ProduitRepository;
 import fr.greta.filrouge.repos.RestaurantRepository;
 
@@ -27,6 +29,8 @@ public class RestaurantController {
 	private CategorieRepository categorieRepo;
 	@Autowired
 	private ProduitRepository produitRepo;
+	@Autowired
+	private MenuRepository menuRepo;
 
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) {
@@ -38,7 +42,9 @@ public class RestaurantController {
 			mv.addObject("restaurant" , resto);
 		}
 
-		List <Categorie> categorieList = categorieRepo.findAll();
+		List <Categorie> categorieList = categorieRepo.findByActif(true);
+		List <Menu> menuList = menuRepo.findAll();
+		mv.addObject("menuList" , menuList);
 		mv.addObject("categorieList" , categorieList);
 		return mv;
 	}

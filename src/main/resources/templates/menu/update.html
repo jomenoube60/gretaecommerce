@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head th:replace="fragment/main :: head">
-  </head>
-  <body class="container">
+	<head th:replace="fragment/main :: head">
+	</head>
+	<body class="container">
 
-  <div th:replace="fragment/main :: navbar">
-  </div>
-  <h1 th:text="'Modifier ' + ${menu.nom}">Ajout d'un nouveau menu</h1>
-  <form action="#" method="post" th:action="@{/menu/restaurateur/update/{id}(id=${menu.id})}" th:object="${menu}">
-  <div class="form-group col-md-6">
-    <label class="form-label">Prix unitaire HT</label>
-    <input class="form-control" type="number" th:field="*{prixHT}">
+		<div th:replace="fragment/main :: navbar">
+  		</div>
+  		<h1 th:text="'Modifier ' + ${menu.nom}">Ajout d'un nouveau menu</h1>
+  		<form action="#" method="post" th:action="@{/menu/restaurateur/update/{id}(id=${menu.id})}" th:object="${menu}">
+  			<div class="form-group col-md-6">
+    			<label class="form-label">Prix unitaire HT</label>
+    			<input class="form-control" type="number" th:field="*{prixHT}">
 
-  </div>
+  			</div>
 
-  <div class="form-group col-md-6">
-    <label class="form-label">Nom<label>
-    <input class="form-control" type="text" th:field="*{nom}">
-  </div>
+  			<div class="form-group col-md-6">
+    			<label class="form-label">Nom</label>
+    			<input class="form-control" type="text" th:field="*{nom}">
+  			</div>
+  			
+  			<input type="file" th:field="*{image}">
 
-  <input type="submit" value="Valider">
-  </form>
+  			<input type="submit" value="Valider">
+  		</form>
 
-  <div th:replace="fragment/main :: footer">
-  </div>
+  		<div th:replace="fragment/main :: footer">
+  		</div>
 
-  </body>
+  	</body>
 </html>
