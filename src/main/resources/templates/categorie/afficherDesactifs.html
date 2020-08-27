@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Liste des Categories</title>
 </head>
-<body>
+<body class="container">
 <div th:replace="fragment/main :: navbar"></div>
 <h1>Liste des Categories</h1>
 	<table class="table" th:fragment="tableCategories">
@@ -14,41 +14,41 @@
 			<th>Action</th>
 		</tr>
 		<tr th:each="categorie, categorieStat : ${categories}" th:if="!${categorie.actif}" >
-			
+
 			<td>
 				<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
 			</td>
-			
+
 			<td th:text= "${categorie.nom}">nom</td>
-			
+
 			<td>
 				<a type="button"
 					class="btn btn-success"
-					href="#" 
+					href="#"
 					th:href="@{/categorie/{id}(id=${categorie.id})}" >
 					Afficher
-				</a>	
-			
+				</a>
+
 				<a type="button"
 					class="btn btn-warning"
-					href="#" 
+					href="#"
 					sec:authorize="${hasRole('RESTAURATEUR')}"
 					th:href="@{/restaurateur/categorie/update/{id}(id=${categorie.id})}" >
 					Modifier
-				</a>		
-			
+				</a>
+
 				<a type="button"
 					class="btn btn-primary activeCategorieBtn"
 					href="#"
-					
-					th:href="@{/restaurateur/categorie/activer/{id}(id=${categorie.id})}" 
+
+					th:href="@{/restaurateur/categorie/activer/{id}(id=${categorie.id})}"
 					data-th-success-url="@{/categorie}">
 					Activer
 				</a>
-				
-				
+
+
 			</td>
-		</tr>	
+		</tr>
 	</table>
 
 

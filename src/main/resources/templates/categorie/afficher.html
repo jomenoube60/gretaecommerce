@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <title>Afficher une catégorie</title>
 </head>
-<body>
+<body class="container">
 <div th:replace="fragment/main :: navbar"></div>
 
+<div>
+	<img src="#" th:src="|data:image/png;base64, ${categorie.image64}|" th:alt="'categorie '+ ${categorie.nom}">
+</div>
 <div class="row">
 	<h1 th:text= "${categorie.nom}" class="col-md-8">Afficher une catégorie</h1>
 	<span> <img src="" alt=""> </span>
@@ -16,11 +19,12 @@
 
 	<tr th:each="produit : ${produitList}">
 		<td>
-			<img  width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
+			<img  width="50" height="50" th:src="|data:image/png;base64, ${produit.image64}|" th:alt="'image '+ ${produit.nom}"/>
 		</td>
 
 		<td th:text= "${produit.nom}">nom</td>
 		<th th:text= "${produit.prixHt}+' €'"> prix</td>
+			<td> <a href="" th:href="@{/produit/{id} (id=${produit.id})}" class="btn btn-success">Voir</a> </td>
 	</tr>
 </table>
 
