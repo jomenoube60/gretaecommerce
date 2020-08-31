@@ -30,8 +30,12 @@ public class Produit implements Serializable {
 
 	@Lob
 	private byte[] image;
+	
 	@Transient
 	private String image64;
+
+	public boolean actif;
+	
 	/**
 	 * @return the id
 	 */
@@ -112,5 +116,12 @@ public class Produit implements Serializable {
 	}
 
 	
-
+	public boolean isActif() {
+		return actif;
+	}
+	
+	public void setActif(boolean actif) {
+		this.actif = actif;
+	}
+	
 }

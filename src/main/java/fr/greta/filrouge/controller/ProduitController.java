@@ -35,9 +35,10 @@ public class ProduitController {
 	private ProduitRepository produitRepos;
 	@Autowired
 	private CategorieRepository categorieRepos;
-	Logger logger = LoggerFactory.getLogger(ProduitController.class);
-	@GetMapping("/produits")
 	
+	Logger logger = LoggerFactory.getLogger(ProduitController.class);
+	
+	@GetMapping("/produits")
 	public ModelAndView afficherProduits(ModelAndView mv) {
 		List<Produit> produits = produitRepos.findAll();
 		addImage64(produits);
@@ -48,6 +49,17 @@ public class ProduitController {
 		mv.setViewName("produit/showAll");
 		return mv;
 	}
+	
+//	@GetMapping("/produits")
+//	public ModelAndView afficherProduitsInactifs(ModelAndView mv) {
+//		List<Produit> produits = produitRepos.findAll();
+//		addImage64(produits);
+//		mv.addObject("isRestaurateur", true);
+//		mv.addObject("produits", produits);
+//		mv.setViewName("produit/showAll");
+//		return mv;
+//	}
+	
 	@GetMapping("/restaurateur/produit/add")
 	public ModelAndView afficherAddForm(ModelAndView mv) {
 		List<Categorie> categories = categorieRepos.findAll();
@@ -57,6 +69,7 @@ public class ProduitController {
 		mv.setViewName("produit/addForm");
 		return mv;
 	}
+	
 	@PostMapping("/restaurateur/produit/add")
 	public ModelAndView traiterAddform(@Valid Produit produit, BindingResult errors, ModelAndView mv) {
 		logger.info(errors.toString());
@@ -77,6 +90,7 @@ public class ProduitController {
 	public ModelAndView afficherUpdateForm(ModelAndView mv, @PathVariable int id) {
 		Optional<Produit> produitOpt = produitRepos.findById(id);
 		Produit produit = produitOpt.get();
+		boolean status = produit.actif;
 		List<Produit> produitimage = new ArrayList<Produit>();
 		produitimage.add(produit);
 		addImage64(produitimage);
@@ -89,9 +103,10 @@ public class ProduitController {
 
 	@PostMapping("/restaurateur/produit/update/{id}")
 	//on utilise MultipartFile dans les paramètres pour récupérer information venant de ma balise html (name="imageBrut")
-	public String traiterUpdateForm(@Valid Produit produit, BindingResult errors, MultipartFile imageBrut) { 
+	public String traiterUpdateForm(@Valid Produit produit, BindingResult errors, MultipartFile imageBrut, boolean status) { 
 		if(!errors.hasErrors()) {
-			
+			boolean actifStatus = produitRepos.findById(produit.getId()).get().isActif();
+			produit.setActif(actifStatus);	
 			//on teste si imageBrut(balise hatml) est vide ou pas
 			//si pas vide on remplace l'image d'origine par la nouvelle
 			if(!imageBrut.isEmpty()) {
@@ -106,6 +121,7 @@ public class ProduitController {
 				byte[] image = produitRepos.findById(produit.getId()).get().getImage();
 				produit.setImage(image);
 			}
+
 			produitRepos.save(produit);
 			return "redirect:/produits";
 		}
@@ -114,11 +130,30 @@ public class ProduitController {
 		}
 	}
 
-	@PostMapping("/restaurateur/produit/delete/{id}")
+//	Désactive un produit
+	@PostMapping("/restaurateur/produit/desactiver/{id}")
 	@ResponseBody
-	public boolean traiterDeleteForm(@PathVariable int id) {
+	public boolean traiterInactiveForm(@PathVariable int id) {
 		try {
-			produitRepos.deleteById(id);
+			Optional<Produit> produitOpt = produitRepos.findById(id);
+			Produit produit = produitOpt.get();
+			produit.setActif(false);
+			produitRepos.save(produit);
+			return true;
+		}catch(Exception ex) {
+			return false;
+		}		
+	}
+	
+//	Active un produit
+	@PostMapping("/restaurateur/produit/activer/{id}")
+	@ResponseBody
+	public boolean traiterActiveForm(@PathVariable int id) {
+		try {
+			Optional<Produit> produitOpt = produitRepos.findById(id);
+			Produit produit = produitOpt.get();
+			produit.setActif(true);
+			produitRepos.save(produit);
 			return true;
 		}catch(Exception ex) {
 			return false;
@@ -133,7 +168,7 @@ public class ProduitController {
 			List<Produit> produitimage = new ArrayList<Produit>();
 			produitimage.add(produit);
 			addImage64(produitimage);
-			mv.addObject("produit",produit);
+			mv.addObject("produit", produit);
 			mv.setViewName("produit/show");	
 		}
 		else {

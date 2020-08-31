@@ -42,7 +42,7 @@ public class RestaurantController {
 			mv.addObject("restaurant" , resto);
 		}
 
-		List <Categorie> categorieList = categorieRepo.findAll();
+		List <Categorie> categorieList = categorieRepo.findByActif(true);
 		List <Menu> menuList = menuRepo.findAll();
 		mv.addObject("menuList" , menuList);
 		mv.addObject("categorieList" , categorieList);

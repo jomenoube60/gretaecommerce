@@ -2,26 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragment/main :: head">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Liste des produits</title>
 </head>
 <body>
+<div th:replace="fragment/main :: navbar"></div>
+<p th:if="${erreurMsg}" th:text="${erreurMsg}" class="erreurMsg">error</p>
 
-	<div th:replace="fragment/main :: navbar"></div>
-	<div th:if="${erreurMsg}" th:text="${erreurMsg}"></div>
-	  <h1 th:text="${produit.nom}">Produit</h1>
-	  <div th:if="${produit}" class="row">
-	  
-	  <div class="col-md-8">
-  		<table class="table">
-		  	<tr>
-				<th>Image</th>
-				<th>Nom</th>
-				<th>Quantité</th>
-				<th>Categorie</th>
-			</tr>
-	  </table>
-	</div>
-  <div th:replace="fragment/main :: footer"></div>
+<h1>Afficher un produit :</h1>
+
+<table  class="table">
+<tr>
+<th>Nom</th>
+<th>Categorie</th>
+<th>Quantite Disponible</th>
+<th>Image</th>
+</tr>
+<tr th:object="${produit}">
+<td th:text="${produit.nom}">produit</td>
+<td>
+				<span th:each="categorie, catStat : ${produit.categories}"
+					th:text="${catStat.last}? ${categorie.nom} : ${categorie.nom} + ', '">
+				</span>
+			
+			
+			</td>
+<td th:text="${produit.quantiteDisponible}">produit</td>
+<td>
+<img src="#" width="50" height="100" alt="" th:src="|data:image/png;base64, ${produit.image64}|">
+<!-- <img alt="" th:src="'data:image/png;base64, '+${produit.image64}"> -->
+
+</td>
+</tr>
+</table>
+<div th:replace="fragment/main :: footer"></div>
 
 </body>
 </html>

@@ -7,18 +7,24 @@
 <body>
 	<div th:replace="fragment/main :: navbar"></div>
 		<p th:if="${erreurMsg}" th:text="${erreurMsg}" class="erreurMsg">error</p>
-	
 	<h1>Liste des produits :</h1>
-
-	<table class="table" th:fragment="tableProduits">
+	<br />
+	<div class ="row">
+	<div class="col-6">
+	<h2>Produits actifs :</h2>
+	<table class="table table-hover border-bottom border-right" th:fragment="tableProduits">
+	<thead>
 		<tr>
 			<th>Id</th>
 			<th>Nom</th>
 			<th>Categorie</th>
 			<th>Quantite Disponible</th>
 			<th>Image</th>
+			<th>Action</th>
 		</tr>
-		<tr th:each="produit , produitStat: ${produits}">
+	</thead>
+	<tbody>
+		<tr th:each="produit, produitStat : ${produits}" th:if="${produit.actif}">
 			<!-- <td th:text="${produitStat.count}">0</td> -->
 			<td th:text="${produit.id}">id produit</td>
 			<td th:text="${produit.nom}">Nom produit</td>
@@ -26,28 +32,78 @@
 				<span th:each="categorie, catStat : ${produit.categories}"
 					th:text="${catStat.last}? ${categorie.nom} : ${categorie.nom} + ', '">
 				</span>
-			
-			
 			</td>
 			<td th:text="${produit.quantiteDisponible}">produit</td>
 			<td>
-				<img src="#" width="50" height="100" alt="" th:src="|data:image/png;base64, ${produit.image64}|">
-				<!-- <img alt="" th:src="'data:image/png;base64, '+${produit.image64}"> -->
-			
+				<img src="#" width="100" height="100" alt="" th:src="|data:image/png;base64, ${produit.image64}|" class="mx-auto d-block img-fluid">
 			</td>
-			
 			<td>
 				<div class="btn-group" role="group" aria-label="Basic example">
 					<a type="button" class="btn btn-success" href="#" th:href="@{/produit/{id}(id=${produit.id})}">Afficher
-						</a> <a type="button" class="btn btn-primary" href="#"
+					</a> 
+					<a type="button" class="btn btn-primary" href="#"
 				th:href="@{/restaurateur/produit/update/{id}(id=${produit.id})}">Modifier
-							</a> <a type="button" class="btn btn-danger" href="#"
-				th:href="@{/restaurateur/produit/delete/{id}(id=${produit.id})}">Supprimer
-								</a>
+					</a> 
+					<a type="button" class="btn btn-danger desactiverProdBtn" href="#"
+				th:href="@{/restaurateur/produit/desactiver/{id}(id=${produit.id})}" data-th-success-url="@{/produits}">Désactiver
+					</a>
 				</div>
 			</td>
 		</tr>
+	</tbody>
 	</table>
+	</div>
+	
+	<br/>
+	<hr>
+	
+	<div class="col-6">
+	<h2>Produits inactifs :</h2>
+	<table class="table table-hover border-bottom border-left" th:fragment="tableProdInactif" >
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Nom</th>
+			<th>Categorie</th>
+			<th>Quantité</th>
+			<th>Image</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="produit, produitStat : ${produits}" th:if="!${produit.actif}">
+			<td th:text="${produit.id}">id produit</td>
+			<td th:text="${produit.nom}">Nom produit</td>
+			<td>
+				<span th:each="categorie, catStat : ${produit.categories}"
+					th:text="${catStat.last}? ${categorie.nom} : ${categorie.nom} + ', '">
+				</span>
+			</td>
+			<td th:text="${produit.quantiteDisponible}">produit</td>
+			<td>
+				<img src="#" width="100" height="100" alt="" th:src="|data:image/png;base64, ${produit.image64}|" class="mx-auto d-block img-fluid">
+			</td>
+			<td>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<a type="button" class="btn btn-success" href="#" 
+					th:href="@{/produit/{id}(id=${produit.id})}">Afficher
+					</a> 
+					<a type="button" class="btn btn-primary" href="#"
+					th:href="@{/restaurateur/produit/update/{id}(id=${produit.id})}">Modifier
+					</a> 
+					<a type="button" class="btn btn-info activerProdBtn" href="#"
+					th:href="@{/restaurateur/produit/activer/{id}(id=${produit.id})}" 
+					data-th-success-url="@{/produits}">Activer
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
+	
+	</div>
+	<br />
 	<div th:replace="fragment/main :: footer"></div>
 
 </body>

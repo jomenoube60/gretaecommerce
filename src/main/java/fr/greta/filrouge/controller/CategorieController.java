@@ -55,8 +55,10 @@ public class CategorieController {
 		return mv;
 	}
 
-	@GetMapping("/categorie/activer")
-	public ModelAndView afficherCategoriesActives(ModelAndView mv) {
+	
+	@GetMapping("/categorie/inactifs")
+
+public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
 		addImage64Categorie(categories);
 		mv.addObject("isRestaurateur", true);
@@ -69,7 +71,7 @@ public class CategorieController {
 	@GetMapping("/restaurateur/categorie/add")
 	public ModelAndView afficherAddForm(ModelAndView mv) {
 		List<Categorie> categories = cateRepos.findAll();
-		Categorie categorie = new Categorie ();
+		Categorie categorie = new Categorie();
 		mv.addObject("categorie", categorie);
 		mv.setViewName("categorie/ajoutForm");
 		return mv;
@@ -151,10 +153,11 @@ public class CategorieController {
 			mv.addObject("categorie", categorie);
 			mv.addObject("produitList" , produitList);
 			mv.setViewName("categorie/afficher");
-		}
-		else {
+			System.out.println(categorie);
+		} else {
 			redirectAttrs.addFlashAttribute("erreurMsg", "Catégorie introuvable !");
 			mv.setViewName("redirect:/categorie");
+			System.out.println("non");
 		}
 		return mv;
 	}
