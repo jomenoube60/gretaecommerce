@@ -57,7 +57,7 @@ public class MenuController {
 		return mv;
 	}
 
-	@GetMapping("/menu/restaurateur/add")
+	@GetMapping("/restaurateur/menu/add")
 	public ModelAndView addFormAction(ModelAndView mv) {
 		List<Menu> menus = menuRepos.findAll();
 		Menu menu = new Menu();
@@ -68,7 +68,7 @@ public class MenuController {
 		return mv;
 	}
 
-	@PostMapping("/menu/restaurateur/add")
+	@PostMapping("/restaurateur/menu/add")
 	public ModelAndView traiterAddform(@Valid Menu menu, BindingResult errors, ModelAndView mv) {
 		logger.info(errors.toString());
 		if(!errors.hasErrors()) {
