@@ -1,1 +1,43 @@
 @charset "UTF-8";
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+      
+body {
+	padding-top: 5rem;
+}
+
+.starter-template {
+	padding: 3rem 1.5rem;
+	text-align: center;
+}
+
+.accueil-categorie a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.current, #current {
+	border: 2px solid green;
+	border-radius: 5px;
+}
+
+#current {
+	background-color: #99ff66;
+}
+
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+
+	.errorField{
+		border: 1xp solid red;
+	}
+}

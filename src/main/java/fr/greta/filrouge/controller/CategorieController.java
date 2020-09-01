@@ -1,5 +1,7 @@
 package fr.greta.filrouge.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -95,17 +98,34 @@ public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 	public ModelAndView afficherUpdateForm(ModelAndView mv, @PathVariable int id) {
 		Optional<Categorie> categorieOpt = cateRepos.findById(id);
 		Categorie categorie = categorieOpt.get();
+		List<Categorie> categorieImage = new ArrayList<Categorie>();
+		categorieImage.add(categorie);
+		addImage64Categorie(categorieImage);
 		mv.addObject("categorie", categorie);
 		mv.setViewName("categorie/updateForm");
 		return mv;
 	}
+	
 	@PostMapping ("/restaurateur/categorie/update/{id}")
-	public String traiterUpdateForm(@Valid Categorie categorie, BindingResult errors ) {
-		if (!errors.hasErrors()){
+	public String traiterUpdateForm(@Valid Categorie categorie, BindingResult errors, MultipartFile imageBrut) {
+		if (!errors.hasErrors()) {
+			boolean actifStatus = cateRepos.findById(categorie.getId()).get().isActif();
+			categorie.setActif(actifStatus);
+			if(!imageBrut.isEmpty()) {
+				try {
+					byte[] bytes = imageBrut.getBytes();
+					categorie.setImage(bytes);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				byte[] image = cateRepos.findById(categorie.getId()).get().getImage();
+				categorie.setImage(image);
+			}
 			cateRepos.save(categorie);
 			return "redirect:/categorie";
-		}
-		else {
+		} else {
 			return "categorie/updateForm";
 		}
 	}
@@ -150,6 +170,9 @@ public ModelAndView afficherCategoriesActives(ModelAndView mv) {
 			Categorie categorie = categorieOpt.get();
 			List <Produit> produitList = produitRepos.getFindByCategories_Id(categorie.getId());
 			addImage64Produit(produitList);
+			List<Categorie> categorieImage = new ArrayList<Categorie>();
+			categorieImage.add(categorie);
+			addImage64Categorie(categorieImage);
 			mv.addObject("categorie", categorie);
 			mv.addObject("produitList" , produitList);
 			mv.setViewName("categorie/afficher");
