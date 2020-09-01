@@ -34,7 +34,7 @@
 		<div row>
 		<div class="card-deck mt-4">
 			<div class="card col-6 mb-2" th:each="cat1 , index : ${categorieList}"  th:if="${index.index} < 3">
-    			<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}"><img class="card-img-top" src="#" th:src="${cat1.image64}" alt="image1"></a>
+    			<a href="#" th:href="@{/categorie/{id}(id=${cat1.id})}"><img class="card-img-top" th:src="|data:image/png;base64, ${cat1.image64}|" alt="image1"></a>
     			<div class="card-body">
       				<h5 class="card-title" th:text="${cat1.nom}">Catégorie</h5>
       				<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -80,7 +80,8 @@
 					2ème étage à droite <br/>
 					60200 Compiègne
 				</address>
-				<div class="embed-responsive embed-responsive-1by1">
+				<!-- 21:9 L'aspect ratio, pour changer le format de l'élément iframe -->
+				<div class="embed-responsive embed-responsive-21by9">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2596.0021681783146!2d2.826436315135861!3d49.408864679345236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e7d42fd350e39f%3A0xbce4f254cdcc97f2!2sGRETA%20Oise%2C%20Agence%20de%20Compi%C3%A8gne!5e0!3m2!1sfr!2sfr!4v1598533711131!5m2!1sfr!2sfr" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
 					</iframe>
 				</div>

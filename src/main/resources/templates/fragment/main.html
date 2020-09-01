@@ -14,37 +14,48 @@
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+<style>
+	.bd-placeholder-img {
+		font-size: 1.125rem;
+		text-anchor: middle;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	
+	body {
+		padding-top: 5rem;
+	}
+	
+	.starter-template {
+		padding: 3rem 1.5rem;
+		text-align: center;
+	}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      body {
-  padding-top: 5rem;
-}
-.starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
+	.accueil-categorie a {
+		text-decoration: none;
+		color: inherit;
+	}
 
-.accueil-categorie a {
-  text-decoration: none;
-  color: inherit;
-}
+	.current, #current {
+		border: 2px solid green;
+		border-radius: 5px;
+	}
+	
+	#current {
+		background-color: #99ff66;
+	}
+	
+	@media (min-width: 768px) {
+		.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+		}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-
-        .errorField{
-        border: 1xp solid red;}
-      }
+		.errorField{
+			border: 1px solid red;
+		}
+	}
     </style>
   </head>
   <body>
@@ -54,30 +65,47 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+ <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos Produits</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'filrouge/categorie')}? 'current bg-success'">Nos catégories</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" th:href="@{/categorie}">Toutes nos catégories Actives</a>
-          <a class="dropdown-item" href="#" th:href="@{/categorie/inactifs}">Toutes nos catégories Desactivées</a>
+          <a class="dropdown-item" href="#" th:href="@{/categorie}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/categorie')}? 'current'">Toutes nos catégories Actives</a>
+          <a class="dropdown-item" href="#" th:href="@{/categorie/inactifs}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/categorie/inactifs')}? 'current'">Toutes nos catégories Desactivées</a>
 
         </div>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos Menus</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'filrouge/menu') OR #strings.contains(#httpServletRequest.requestURI, 'produits')}? 'current bg-success'">Nos Menus</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
+<<<<<<< HEAD
           <a class="dropdown-item" href="#" th:href="@{/menu}">Tous nos menus</a>
           <a class="dropdown-item" href="#" th:href="@{/produits}">Tous nos produits</a>
+=======
+          <a class="dropdown-item" href="#" th:href="@{/menu}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/menu')}? 'current'">Tous nos menus</a>
+          <a class="dropdown-item" href="#" th:href="@{/menu/restaurateur/add}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, 'menu/restaurateur/add')}? 'current'">Ajouter un menu</a>
+          <a class="dropdown-item" href="#" th:href="@{/produits}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/produits')}? 'current'">Tous nos produits</a>
+>>>>>>> a4fe2c472dc9f91b8c95824708a8c4ae09d12214
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurateur</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'filrouge/restaurateur')}? 'current bg-success'">Restaurateur</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#" th:href="@{/restaurateur/produit/add}">Ajouter Produit</a>
-          <a class="dropdown-item" href="#" th:href="@{/restaurateur/menu/add}">Ajouter Menu</a>
-          <a class="dropdown-item" href="#" th:href="@{/restaurateur/categorie/add}">Ajouter Categorie</a>
+          <a class="dropdown-item" href="#" th:href="@{/restaurateur/produit/add}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/restaurateur/produit/add')}? 'current'">Ajouter Produit</a>
+          <a class="dropdown-item" href="#" th:href="@{restaurateur/menu/add}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, 'restaurateur/menu/add')}? 'current'">Ajouter Menu</a>
+          <a class="dropdown-item" href="#" th:href="@{/restaurateur/categorie/add}"
+          th:id="${#strings.endsWith(#httpServletRequest.requestURI, '/restaurateur/categorie/add')}? 'current'">Ajouter Categorie</a>
         </div>
       </li>
     </ul>

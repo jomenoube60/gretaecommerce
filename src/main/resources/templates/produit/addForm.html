@@ -7,28 +7,50 @@
 <body>
 	<div th:replace="fragment/main :: navbar"></div>
 
+	<div class="container">
+
 	<h1>Ajouter un produit :</h1>
 
-<!-- Attention à enctype pour la gestion des images base64 -->
+	<!-- Attention à enctype pour la gestion des images base64 -->
 	<form action="#" th:action="@{/restaurateur/produit/add}" th:object="${produit}" method="post" enctype="multipart/form-data">
-		<input type="text" th:field="*{nom}" th:errorclass="errorField">
-		<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
-		<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField">
-		<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
-		<input type="text" th:field="*{prixHt}" th:errorclass="errorField">
-		<p th:if="${#fields.hasErrors('prixHt')}" th:errors="*{prixHt}">errors</p>
-		<select th:field="*{categories}" multiple="multiple">
-			<option th:each="cat : ${categorieList}"
-					th:text="${cat.nom}"
-					th:value="${cat.id}">
-					categorie
-			</option>
-		</select>
-
-		<input type="file" th:field="*{image}">
-
-		<input type="submit" value="Ajouter">
+		<div class="row">
+			<div class="col-8">
+				
+				<div class="form-group">
+					<label for="titre">Titre</label>
+					<input type="text" th:field="*{nom}" th:errorclass="errorField" class="form-control">
+					<p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">errors</p>
+				</div>
+				<div class="form-group">
+					<label for="quantite">Quantité</label>
+					<input type="text" th:field="*{quantiteDisponible}" th:errorclass="errorField" class="form-control">
+					<p th:if="${#fields.hasErrors('quantiteDisponible')}" th:errors="*{quantiteDisponible}">errors</p>
+				</div>
+				<div class="form-group">
+					<label for="prix">Prix (HT)</label>
+					<input type="text" th:field="*{prixHt}" th:errorclass="errorField" class="form-control">
+					<p th:if="${#fields.hasErrors('prixHt')}" th:errors="*{prixHt}">errors</p>
+				</div>
+				<div class="form-group">
+					<label for="categories">Catégorie(s)</label>
+					<select th:field="*{categories}" multiple="multiple" class="form-control">
+						<option th:each="cat : ${categorieList}" th:text="${cat.nom}" th:value="${cat.id}">
+						categorie
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="image">Image</label>
+					<input type="file" th:field="*{image}">
+				</div>
+				
+				<input type="submit" value="Ajouter" class="btn btn-primary">
+				
+			</div>
+		</div>
 	</form>
+
+	</div>
 
 	<div th:replace="fragment/main :: footer"></div>
 

@@ -8,7 +8,7 @@
 <div th:replace="fragment/main :: navbar"></div>
 
 <div>
-	<img src="#" th:src="|data:image/png;base64, ${categorie.image64}|" th:alt="'categorie '+ ${categorie.nom}">
+	<img width="150" height="150" src="#" th:src="|data:image/png;base64, ${categorie.image64}|" th:alt="'categorie '+ ${categorie.nom}">
 </div>
 <div class="row">
 	<h1 th:text= "${categorie.nom}" class="col-md-8">Afficher une catégorie</h1>

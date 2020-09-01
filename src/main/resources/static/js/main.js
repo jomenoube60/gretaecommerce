@@ -17,7 +17,7 @@
 		console.log("ajax");
 		$.post(url, function(data){
 			if(data){
-				alert("Opération réussie!");
+//				alert("Opération réussie!");
 				window.location.href = successUrl;
 //				window.location.replace(successUrl);
 			}
@@ -29,39 +29,54 @@
 	
 	$(".activeCategorieBtn").on("click", function(evt){
 		evt.preventDefault();
-		alert("test activeCategorieBtn");
+		const reponse = confirm("Activer la catégorie?");
+		if(reponse) {
 		//récupérer Nom
 		let url = $(this).attr("href");
 		let successUrl = $(this).attr("success-url");
 		post(url, successUrl);
+		} else {
+			
+		}
 	});
 
 	$(".desactiveCategorieBtn").on("click", function(evt){
 		evt.preventDefault();
-		alert("test desactiveCategorieBtn");
+		const reponse = confirm("Désactiver la catégorie?");
+		if(reponse) {
 		//récupérer Nom
 		let url = $(this).attr("href");
 		let successUrl = $(this).attr("success-url");
 		post(url, successUrl);
+		} else {
+			
+		}
 	});
 
 //	Produit boutons activer/désactiver
 	$(".activerProdBtn").on("click", function(evt){
 		evt.preventDefault();
-		alert("test activerProdBtn");
+		const reponse = confirm("Activer le produit?");
+		if(reponse) {
 		//récupérer Nom
 		let url = $(this).attr("href");
 		let successUrl = $(this).attr("success-url");
 		post(url, successUrl);
+		} else {
+			
+		}
 	});
 
 	$(".desactiverProdBtn").on("click", function(evt){
 		evt.preventDefault();
-		alert("test desactiverProdBtn");
+		const reponse = confirm("Désactiver le produit?");
+		if(reponse) {
 		//récupérer Nom
 		let url = $(this).attr("href");
 		let successUrl = $(this).attr("success-url");
 		post(url, successUrl);
+		} else {
+		}
 	});
 	
 	$(".deleteMenuBtn").on("click", function(evt){

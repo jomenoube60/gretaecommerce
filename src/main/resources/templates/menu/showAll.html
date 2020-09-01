@@ -16,7 +16,7 @@
 		</tr>
 		<tr th:each="menu , menuStat: ${menus}">
 			<td th:text="${menuStat.count}">0</td>
-			<td th:text="${menu}">menu</td>
+			<td th:text="${menu.nom}">menu</td>
 			<td>
 				<div class="btn-group" role="group" aria-label="Basic example">
 					<a type="button" class="btn btn-success" href="#" th:href="@{/menu/{id}(id=${menuStat.count})}">Afficher

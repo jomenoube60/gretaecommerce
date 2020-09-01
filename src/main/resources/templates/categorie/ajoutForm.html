@@ -6,19 +6,30 @@
 </head>
 <body class="container">
 	<div th:replace="fragment/main :: navbar"></div>
-		</p>
+	
 	<h1>Ajouter une catégorie :</h1>
 	<!-- formulaire -->
 
-	<form action="#" th:action="@{/restaurateur/categorie/add}"
-					th:object="${categorie}"
-					method="post"
-					enctype="multipart/form-data">
-		<input type="text" th:field="*{nom}" th:errorclass="errorField">
-		<p th:if="${#fields.hasErrors('nom')}" th:errors= "*{nom}">>errors</p>
+	<form action="#" th:action="@{/restaurateur/categorie/add}" th:object="${categorie}"
+	method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-10">
+			
+				<div class="form-group">
+					<label for="titre">Titre</label>
+					<input type="text" th:field="*{nom}" th:errorclass="errorField" class="form-control">
+					<p th:if="${#fields.hasErrors('nom')}" th:errors= "*{nom}">>errors</p>
+				</div>
 
-		<input type="file" th:field="*{image}">
-		<input type="submit" value="Ajouter">
+				<div class="form-group">
+				<label for="image">Image</label>
+					<input type="file" th:field="*{image}" class="form-control">
+				</div>
+				
+				<input type="submit" value="Ajouter" class="btn btn-primary">
+				
+			</div>
+		</div>
 	</form>
 
 	<footer th:replace="fragment/main :: footer"></footer>

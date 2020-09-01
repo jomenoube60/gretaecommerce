@@ -5,53 +5,92 @@
 <title>Liste des Categories</title>
 </head>
 <body class="container">
-<div th:replace="fragment/main :: navbar"></div>
-<h1>Liste des Categories</h1>
-	<table class="table" th:fragment="tableCategories">
-		<tr>
-			<th>Image</th>
-			<th>Nom</th>
-			<th>Action</th>
-		</tr>
-		<tr th:each="categorie, categorieStat : ${categories}" th:if="${categorie.actif}" >
+	<div th:replace="fragment/main :: navbar"></div>
+	<p th:if="${erreurMsg}" th:text="${erreurMsg}" class="erreurMsg">error</p>
+	<h1>Liste des Categories</h1>
+	<br/>
+	<div class="row">
+		<div class="col-6">
+			<h2>Catégories actives :</h2>
+			<table class="table table-hover border-bottom border-right" th:fragment="tableCategories">
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Nom</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="categorie, categorieStat : ${categories}" th:if="${categorie.actif}" >
+					<td>
+						<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
+					</td>
 
-			<td>
-				<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
-			</td>
+					<td th:text= "${categorie.nom}">nom</td>
+					<td>	
+						<a type="button"class="btn btn-success"href="#"
+						th:href="@{/categorie/{id}(id=${categorie.id})}" >
+						Afficher</a>
 
-			<td th:text= "${categorie.nom}">nom</td>
+						<a type="button" class="btn btn-warning" href="#"
+						sec:authorize="${hasRole('RESTAURATEUR')}"
+						th:href="@{/restaurateur/categorie/update/{id}(id=${categorie.id})}" >
+						Modifier</a>
 
-			<td>
-				<a type="button"
-					class="btn btn-success"
-					href="#"
-					th:href="@{/categorie/{id}(id=${categorie.id})}" >
-					Afficher
-				</a>
+						<a type="button" class="btn btn-danger desactiveCategorieBtn" href="#"
+						th:href="@{/restaurateur/categorie/desactiver/{id}(id=${categorie.id})}"
+						data-th-success-url="@{/categorie}">
+						Desactiver</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<br />
+		<hr />
+		
+		<div class="col-6">
+			<h2>Catégories inactives :</h2>
+			<table class="table table-hover border-bottom border-left" th:fragment="tableCategoriesInactives" >
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Nom</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="categorie, categorieStat : ${categories}" th:if="!${categorie.actif}" >
+						<td>
+							<img width="50" height="50" th:src="|data:image/png;base64, ${categorie.image64}|"/>
+						</td>
 
-				<a type="button"
-					class="btn btn-warning"
-					href="#"
-					sec:authorize="${hasRole('RESTAURATEUR')}"
-					th:href="@{/restaurateur/categorie/update/{id}(id=${categorie.id})}" >
-					Modifier
-				</a>
+						<td th:text="${categorie.nom}">nom</td>
+						<td>
+							<div class="btn-group" role="group" aria-label="Basic example">	
+							<a type="button" class="btn btn-success" href="#"
+							th:href="@{/categorie/{id}(id=${categorie.id})}" >
+							Afficher</a>
 
-				<a type="button"
-					class="btn btn-danger desactiveCategorieBtn"
-					href="#"
+							<a type="button" class="btn btn-warning" href="#"
+							sec:authorize="${hasRole('RESTAURATEUR')}"
+							th:href="@{/restaurateur/categorie/update/{id}(id=${categorie.id})}" >
+							Modifier</a>
 
-					th:href="@{/restaurateur/categorie/desactiver/{id}(id=${categorie.id})}"
-					data-th-success-url="@{/categorie}">
-					Desactiver
-				</a>
+							<a type="button" class="btn btn-primary desactiveCategorieBtn" href="#"
+							th:href="@{/restaurateur/categorie/activer/{id}(id=${categorie.id})}"
+							data-th-success-url="@{/categorie}">
+							Activer</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 
-			</td>
-		</tr>
-	</table>
-
-
-<footer th:replace="fragment/main :: footer"></footer>
+	<footer th:replace="fragment/main :: footer"></footer>
 </body>
 </html>
